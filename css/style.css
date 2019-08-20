@@ -8,7 +8,7 @@
 body{
   background-color: #f2f2f2;
   margin: 0;
-  padding: 20px;
+  padding: 5px;
   font-family: 'Nunito', sans-serif;
 }
 .back-link{
@@ -60,6 +60,9 @@ body{
  * Responsive
  */
  @media screen and (min-width: 565px) {
+   body {
+     padding: 20px;
+   }
 
    .card-container {
      max-width: 600px;
@@ -72,7 +75,10 @@ body{
    }
  }
  @media screen and (min-width: 330px) and (max-width: 565px) {
-
+   body {
+     padding: 20px;
+   }
+   
    .card {
      width: 23.5%;
      height: 95px;
