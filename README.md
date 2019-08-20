@@ -1,2 +1,3 @@
 # 2-Memory-Game
-Project number 2 in Udacitys Front-end Nanodegree. Javascript.
+
+This project is gonna be fun :D
