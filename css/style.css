@@ -22,7 +22,7 @@ body{
  * Header
  */
 .header-container {
-  width: 700px;
+  width: 300px;
   margin: auto;
   text-align: center;
 }
@@ -31,7 +31,7 @@ body{
  * Cards
  */
 .card-container {
-  width: 600px;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   margin: auto;
@@ -41,9 +41,8 @@ body{
   padding: 2px;
 }
 .card {
-  width: 24.3%;
-  max-width: 150px;
-  height: 150px;
+  width: 23.5%;
+  height: 100%;
   background-color: #6ad2ff;
   margin: 2px;
   padding: 0;
@@ -51,8 +50,30 @@ body{
   border-radius: 6px;
   border: 1px solid #d7d7d7;
   /*TODO: revisit how to make the number go to center, when adding img/symbol*/
-  font-size: 4em;
+  font-size: 3em;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
+/*
+ * Responsive
+ */
+ @media screen and (min-width: 565px) {
+
+   .card-container {
+     max-width: 600px;
+     height: 50%;
+   }
+
+   .card {
+     width: 24.2%;
+     height:150px;
+   }
+ }
+ @media screen and (min-width: 330px) and (max-width: 565px) {
+
+   .card {
+     width: 23.5%;
+     height: 95px;
+ }
