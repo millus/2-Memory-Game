@@ -43,17 +43,48 @@ body{
 .card {
   width: 23.5%;
   height: 77px;
-  background-color: #6ad2ff;
   margin: 2px;
   padding: 0;
   list-style-type: none;
   border-radius: 6px;
-  border: 1px solid #d7d7d7;
-  /*TODO: revisit how to make the number go to center, when adding img/symbol*/
+  /*TODO: revisit how to make the number go to center, when adding img/symbol*
   font-size: 3em;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center;*/
+  perspective: 1000px;
+  background-color: transparent;
+}
+
+.card-box{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.card:hover .card-box{
+  transform: rotateY(180deg);
+}
+
+.card-front {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #6ad2ff;
+  backface-visibility: hidden;
+  border: 1px solid #d7d7d7;
+}
+
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: yellow;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+  border: 1px solid #d7d7d7;
 }
 
 /*
@@ -83,3 +114,5 @@ body{
      width: 23.5%;
      height: 95px;
  }
+ 
+ /* Reference: Making a 2-sided card flip. https://www.w3schools.com/howto/howto_css_flip_card.asp */

@@ -17,9 +17,19 @@ const symbols = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 const container = document.querySelector('.card-container');
 
 
+/* Method for creating the cards and adding them to the DOM with symbol as content */
 for(const symbol of symbols){
   const card = document.createElement("li"); /* makes <li></li> */
-  card.setAttribute('class','card'); /* makes <li class="card"> </li> */
-  container.appendChild(card); /* adds the new <li> to existing <ul> */
-  card.textContent = `${symbol}`; /* inserts the symbol in the <li> */
+  const cardBox = document.createElement("div");
+  const cardUp = document.createElement("div");
+  const cardDown = document.createElement("div");
+  card.setAttribute('class', 'card');
+  cardUp.setAttribute('class','card-front'); /* makes <li class="card card-front"> </li> */
+  cardDown.setAttribute('class','card-back');
+  cardBox.setAttribute('class', 'card-box');
+  container.appendChild(card);
+  card.appendChild(cardBox);
+  cardBox.appendChild(cardUp); /* adds the new <li> to existing <ul> */
+  cardBox.appendChild(cardDown);
+  cardDown.textContent = `${symbol}`; /* inserts the symbol in the <li> */
 }
