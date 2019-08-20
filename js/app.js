@@ -10,3 +10,16 @@ for (const card of cards){ if (card.textContent === '3'){card.style.backgroundCo
 "blue"
 
 */
+
+/* TODO: Add real symbols here,
+ * and update function to have 2-sided cards. */
+const symbols = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+const container = document.querySelector('.card-container');
+
+
+for(const symbol of symbols){
+  const card = document.createElement("li"); /* makes <li></li> */
+  card.setAttribute('class','card'); /* makes <li class="card"> </li> */
+  container.appendChild(card); /* adds the new <li> to existing <ul> */
+  card.textContent = `${symbol}`; /* inserts the symbol in the <li> */
+}
