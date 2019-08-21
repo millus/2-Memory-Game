@@ -1,7 +1,7 @@
 /*
 * TODO: Add real symbols here,
 */
-let symbols = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+let symbols = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8];
 const board = document.querySelector('.card-container');
 
 /* Shuffles symbols */
@@ -9,6 +9,7 @@ symbols = shuffleCards(symbols);
 
 /* Adds cards to the board with the shuffled symbols facing down. */
 addCardsToBoard(symbols, board);
+
 
 
 /**
@@ -41,6 +42,9 @@ function addCardsToBoard(symbols, board) {
 
     /* Adds the symbols to the card-side facing down. */
     cardDown.textContent = `${symbol}`;
+
+    /*TODO fix this method to smaller ones*/
+    cardBox.addEventListener('click', function () {cardBox.classList.toggle('card-flip');});
 
   }
 }

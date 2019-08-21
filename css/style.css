@@ -63,9 +63,15 @@ body{
     transform-style: preserve-3d;
 }
 
+.card-flip{
+  transform: rotateY(180deg);
+}
+
+/*
 .card:hover .card-box{
   transform: rotateY(180deg);
 }
+*/
 
 .card-front,
 .card-back {
