@@ -1,4 +1,4 @@
-# 2-Memory-Game
+# Memory Game
 Reveal all card pairs as fast as you can without losing any stars.
 
 ## How do I start the game?
