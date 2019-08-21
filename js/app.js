@@ -1,62 +1,74 @@
 /*
-TODO: Code tested in browser, and worked for traversing cards with for...of
-const cards = document.querySelectorAll('.card');
-undefined
-cards
-NodeList(16) [li.card, li.card, li.card, li.card, li.card, li.card, li.card, li.card, li.card, li.card, li.card, li.card, li.card, li.card, li.card, li.card]0: li.card1: li.card2: li.card3: li.card4: li.card5: li.card6: li.card7: li.card8: li.card9: li.card10: li.card11: li.card12: li.card13: li.card14: li.card15: li.cardlength: 16__proto__: NodeList
-for (const card of cards){}
-undefined
-for (const card of cards){ if (card.textContent === '3'){card.style.backgroundColor ='red'}else{card.style.backgroundColor = 'blue';}}
-"blue"
+* TODO: Add real symbols here,
 */
-
-/* TODO: Add real symbols here,
- * and update function to have 2-sided cards. */
 let symbols = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
-const container = document.querySelector('.card-container');
+const board = document.querySelector('.card-container');
 
-symbols = shuffle(symbols);
-addCardsToContainer(symbols, container);
+/* Shuffles symbols */
+symbols = shuffleCards(symbols);
 
-/* Method for creating the cards and adding them to the DOM with symbol as content */
-function addCardsToContainer(symbols, container) {
-  for(const symbol of symbols){
-    const card = document.createElement("li"); /* makes <li></li> */
-    const cardBox = document.createElement("div");
-    const cardUp = document.createElement("div");
-    const cardDown = document.createElement("div");
+/* Adds cards to the board with the shuffled symbols facing down. */
+addCardsToBoard(symbols, board);
+
+
+/**
+* @description Create and add 2-sided cards to the DOM with symbol as content.
+* @param {array} symbols - The symbols for the cards facing down.
+* @param {ul} board - The card-container representing the board.
+* @see https://www.w3schools.com/howto/howto_css_flip_card.asp
+*/
+function addCardsToBoard(symbols, board) {
+
+  for(const symbol of symbols) {
+
+    /* Creates the elements needed to build a card */
+    const card = document.createElement("li"); /* the card spot on the board */
+    const cardBox = document.createElement("div"); /* the box making the card-sides stay on top in same pos */
+    const cardUp = document.createElement("div"); /* card-side facing up */
+    const cardDown = document.createElement("div"); /* card-side facing down */
+
+    /* Sets the correct class attributes to the newly created card-elements */
     card.setAttribute('class', 'card');
     cardBox.setAttribute('class', 'card-box');
-    cardUp.setAttribute('class','card-front'); /* makes <li class="card card-front"> </li> */
+    cardUp.setAttribute('class','card-front');
     cardDown.setAttribute('class','card-back');
-    container.appendChild(card);
+
+    /* Adds the needed card-elements to eachother and to the existing board (<ul> container) */
+    board.appendChild(card);
     card.appendChild(cardBox);
-    cardBox.appendChild(cardUp); /* adds the new <li> to existing <ul> */
+    cardBox.appendChild(cardUp);
     cardBox.appendChild(cardDown);
-    cardDown.textContent = `${symbol}`; /* inserts the symbol in the <li> */
+
+    /* Adds the symbols to the card-side facing down. */
+    cardDown.textContent = `${symbol}`;
+
   }
 }
 
-/*
- * The de-facto unbiased shuffle algorithm is the Fisher-Yates (aka Knuth) Shuffle.
- * See https://github.com/coolaj86/knuth-shuffle
- * Ref: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array/2450976#2450976
- */
-function shuffle(array) {
-  var currentIndex = array.length, temporaryValue, randomIndex;
+/**
+* @description Shuffles an array of symbols using Fisher-Yates shuffle.
+* @param {array} symbols - The symbols on the cards facing down.
+* @returns {array} The shuffled version of the array symbols.
+* @see https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array/2450976#2450976
+*/
+function shuffleCards(symbols) {
+  let symbolPos = symbols.length; /* Starts shuffle at the last symbol */
+  let temp = 0;
+  let randomPos = 0;
 
-  // While there remain elements to shuffle...
-  while (0 !== currentIndex) {
+  /* Ends shuffle when back on the first symbol, position 0 */
+  while (symbolPos !== 0) {
 
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
+    randomPos = Math.floor(Math.random() * symbolPos);
 
-    // And swap it with the current element.
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
+    /* Keep on going back til all symbols have been shuffled. */
+    symbolPos--;
+
+    /* Using a temp variable to swap the symbol on randomPos and symbolPos. */
+    temp = symbols[symbolPos];
+    symbols[symbolPos] = symbols[randomPos];
+    symbols[randomPos] = temp;
   }
 
-  return array;
+  return symbols;
 }
