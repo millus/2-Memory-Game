@@ -10,7 +10,7 @@ or...
 
 Go to https://millus.github.io/2-Memory-Game/ and start playing.
 
-## What are the rules of the game?
+## How do I play this game?
 - Click on the cards to find all matching pairs.
 - When you click on a card it flips, and you can see its symbol.
 - Click on a second card to find a matching symbol.
