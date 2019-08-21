@@ -8,7 +8,7 @@ Reveal all card pairs as fast as you can without losing any stars.
 
 or...
 
-1. Go to https://millus.github.io/2-Memory-Game/ and start playing.
+Go to https://millus.github.io/2-Memory-Game/ and start playing.
 
 ## What are the rules of the game?
 - Click on the cards to find all matching pairs.
@@ -18,12 +18,12 @@ or...
 - The game ends when all cards are facing up with the symbols.
 - Everytime you look at two cards there is two scenarios:
 
-# Scenario 1: Cards match. (Card 1 = Card 2)
+### Scenario 1: Cards match. (Card 1 = Card 2)
 - It means: YAY! You found a match.
 - What happens: The cards will stay facing up with the symbols showing.
 - Next step: You got one right, now continue searching for the next pair.
 
-# Scenario 2: Card don't match. (Card 1 != Card 2)
+### Scenario 2: Card don't match. (Card 1 != Card 2)
 - It means: Oh no, one attempt down, no match found.
 - What happens: The cards will flip back with the symbols facing down.
 - Next step: You didn't get this one right, but now you know what symbols these two cards have. Continue searching for next pair with this in mind.
