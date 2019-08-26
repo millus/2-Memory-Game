@@ -2,50 +2,107 @@
 * TODO: Add real symbols here,
 */
 let symbols = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8];
-const board = document.querySelector('.card-container');
+
+/*Create board*/
+const board = document.createElement('ul');
+board.setAttribute('class', 'card-container');
 
 /* Shuffles symbols */
 symbols = shuffleCards(symbols);
 
-/* Adds cards to the board with the shuffled symbols facing down. */
-addCardsToBoard(symbols, board);
+/* Adds cards to the board off-screen with the shuffled symbols facing down. */
+createCards(symbols, board);
 
+/*Add board with cards to site, causing reflow/repaint*/
+document.body.appendChild(board);
 
+/* Look up the cards and adds symbols to them. */
+const cards = document.querySelectorAll('.card');
+addSymbols(symbols, cards);
+
+/*Using event delegation, add event listener only to the board, not each card*/
+board.addEventListener('click', flipCard);
+
+/*Adding a restart btn with an event listener*/
+const restartBtn = document.querySelector('.btn-restart');
+restartBtn.addEventListener('click', restartGame);
 
 /**
-* @description Create and add 2-sided cards to the DOM with symbol as content.
+* @description Restarts the game by shuffling and adding symbols.
+*/
+function restartGame() {
+  /* Flip all cards so all is facing down */
+  flipAllCards(cards);
+  /* Shuffles symbols */
+  symbols = shuffleCards(symbols);
+  /* Adds the new symbols*/
+  addSymbols(symbols, cards);
+}
+
+/**
+* @description Click on a card and flip it 180deg, by toggling card-flip class on the div holding the card-sides.
+* @param {event} evt - Takes in an event object.
+*/
+function flipCard (evt) {
+  if(evt.target.parentElement.classList.contains('card')) {
+   evt.target.parentElement.classList.toggle('card-flip');
+  }
+}
+
+/**
+* @description Flip all cards so they all face down by removing card-flip.
+* @param {NodeList} cards - Takes in a NodeList of all the cards.
+*/
+function flipAllCards (cards) {
+  for(const card of cards) {
+    card.classList.remove('card-flip');
+  }
+ }
+
+/**
+* @description Adding symbols to the existing cards card-front. Using hide/change all/show for reducing reflow/repaints.
+* @param {array} symbols - An array of pairs of symbols.
+*/
+function addSymbols (symbols, cards) {
+  for(let i = 0; i < cards.length; i++) {
+    cards.item(i).lastElementChild.classList.add('hide');
+    cards.item(i).lastElementChild.textContent = symbols[i];
+  }
+  for(const card of cards) {
+    card.lastElementChild.classList.remove('hide');
+  }
+}
+
+/**
+* @description Create 2-sided cards off-screen.
 * @param {array} symbols - The symbols for the cards facing down.
 * @param {ul} board - The card-container representing the board.
 * @see https://www.w3schools.com/howto/howto_css_flip_card.asp
 */
-function addCardsToBoard(symbols, board) {
+function createCards(symbols, board) {
 
   for(const symbol of symbols) {
 
     /* Creates the elements needed to build a card */
-    const card = document.createElement("li"); /* the card spot on the board */
-    const cardBox = document.createElement("div"); /* the box making the card-sides stay on top in same pos */
+    const cardPos = document.createElement("li"); /* the card pos on the board */
+    const card = document.createElement("div"); /* the card div that contains two card-sides, and make them stay in same pos */
+
     const cardUp = document.createElement("div"); /* card-side facing up */
+
     const cardDown = document.createElement("div"); /* card-side facing down */
 
+
     /* Sets the correct class attributes to the newly created card-elements */
+    cardPos.setAttribute('class', 'card-pos');
     card.setAttribute('class', 'card');
-    cardBox.setAttribute('class', 'card-box');
-    cardUp.setAttribute('class','card-front');
-    cardDown.setAttribute('class','card-back');
+    cardUp.setAttribute('class','card-back');
+    cardDown.setAttribute('class','card-front');
 
     /* Adds the needed card-elements to eachother and to the existing board (<ul> container) */
-    board.appendChild(card);
-    card.appendChild(cardBox);
-    cardBox.appendChild(cardUp);
-    cardBox.appendChild(cardDown);
-
-    /* Adds the symbols to the card-side facing down. */
-    cardDown.textContent = `${symbol}`;
-
-    /*TODO fix this method to smaller ones*/
-    cardBox.addEventListener('click', function () {cardBox.classList.toggle('card-flip');});
-
+    cardPos.appendChild(card);
+    card.appendChild(cardUp);
+    card.appendChild(cardDown);
+    board.appendChild(cardPos);
   }
 }
 
