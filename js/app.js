@@ -1,7 +1,16 @@
 /*
 * TODO: Add real symbols here,
 */
-let symbols = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8];
+let symbols2 = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8];
+let symbols = [
+'001-mixer.svg','001-mixer.svg',
+'002-baker.svg','002-baker.svg',
+'006-rolling pin.svg','006-rolling pin.svg',
+'008-cookie.svg','008-cookie.svg',
+'013-flour.svg','013-flour.svg',
+'017-donut.svg','017-donut.svg',
+'023-whisk.svg','023-whisk.svg',
+'043-apron.svg','043-apron.svg'];
 
 /*Create board*/
 const board = document.createElement('ul');
@@ -14,7 +23,7 @@ symbols = shuffleCards(symbols);
 createCards(symbols, board);
 
 /*Add board with cards to site, causing reflow/repaint*/
-document.body.appendChild(board);
+document.querySelector('.game-board').appendChild(board);
 
 /* Look up the cards and adds symbols to them. */
 const cards = document.querySelectorAll('.card');
@@ -66,7 +75,7 @@ function flipAllCards (cards) {
 function addSymbols (symbols, cards) {
   for(let i = 0; i < cards.length; i++) {
     cards.item(i).lastElementChild.classList.add('hide');
-    cards.item(i).lastElementChild.textContent = symbols[i];
+    cards.item(i).lastElementChild.innerHTML = `<img class="card-symbol" src="img/${symbols[i]}" alt="${symbols[i]}"></img>`;
   }
   for(const card of cards) {
     card.lastElementChild.classList.remove('hide');

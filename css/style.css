@@ -8,7 +8,7 @@
 body{
   background-color: #f2f2f2;
   margin: 0;
-  padding: 5px;
+  padding: 0;
   font-family: 'Nunito', sans-serif;
 }
 
@@ -17,6 +17,7 @@ body{
   text-decoration: none;
   line-height: 30px;
   border-bottom: 1px solid;
+  margin: 10px;
 }
 
 .hide{
@@ -33,11 +34,20 @@ body{
 }
 
 /*
+ * Game
+ */
+ .game-container {
+   max-width: 600px;
+   margin: auto;
+ }
+
+/*
  * Game controls
  */
  .game-controls{
     display: flex;
     flex-wrap: no-wrap;
+    padding: 5px;
  }
 
  .btn-restart{
@@ -53,9 +63,7 @@ body{
   display: flex;
   flex-wrap: wrap;
   margin: auto;
-  border: 2px solid #d7d7d7;
-  border-radius: 8px;
-  background-color: #fff;
+  background-color: #f2f2f2;
   padding: 2px;
 }
 .card-pos {
@@ -64,22 +72,17 @@ body{
   margin: 2px;
   padding: 0;
   list-style-type: none;
-  /*TODO: revisit how to make the number go to center, when adding img/symbol*
-  font-size: 3em;
-  display: flex;
-  align-items: center;
-  justify-content: center;*/
   perspective: 1000px;
   background-color: transparent;
 }
 
 .card {
-    order: 1000;
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.8s;
-    transform-style: preserve-3d;
+  order: 1000;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
 }
 
 .card-flip {
@@ -88,7 +91,7 @@ body{
 
 .card-front,
 .card-back {
-  border-radius: 6px;
+  border-radius: 8px;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -102,17 +105,28 @@ body{
 }
 
 .card-front {
-  background-color: yellow;
+  background-color: #fff;
   transform: rotateY(180deg);
+  padding: 10px;
 }
+
+/*
+ * Footer
+ */
+ .footer-container {
+   width: 100%;
+   background-color: #2F2E41;
+   color: #fff;
+   text-align: center;
+   padding: 6px;
+   margin: 30px 0 0 0;
+   font-size: 0.7em;
+ }
 
 /*
  * Responsive
  */
  @media screen and (min-width: 565px) {
-   body {
-     padding: 20px;
-   }
 
    .card-container {
      max-width: 600px;
@@ -125,9 +139,6 @@ body{
    }
  }
  @media screen and (min-width: 330px) and (max-width: 565px) {
-   body {
-     padding: 20px;
-   }
 
    .card-pos {
      width: 23.5%;
