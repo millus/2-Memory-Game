@@ -54,13 +54,15 @@ function restartGame() {
   /* Adds the new symbols*/
   addSymbols(symbols, cards);
 }
+
 let flipFinish = true;
+
 /**
 * @description Click on a card and flip it 180deg, by toggling card-flip class on the div holding the card-sides.
 * @param {event} evt - Takes in an event object.
 */
 function flipCard (evt) {
-  if(flipFinish){
+  if(flipFinish){ /*wait until flipped cards are flipped back*/
     const cardClicked = evt.target.parentElement;
   if(cardClicked.classList.contains('card') && !cardClicked.classList.contains('card-flip')) {
     cardClicked.classList.toggle('card-flip');
@@ -77,6 +79,10 @@ function flipCard (evt) {
         cardClicked2 = cardClicked;
       if(isAMatch(cardsFlipped[0], cardsFlipped[1])){/* check if the two symbols match (img alt-text are the same)*/
         console.log('its a match');
+        /*TODO: maybe refactor the sound part, but it works! yay*/
+        const success = document.querySelector('.sound-success');
+        success.autoplay = true;
+        success.play();
       } else {
           console.log('its not a match');
           flipFinish = false;
@@ -84,7 +90,7 @@ function flipCard (evt) {
             cardClicked1.classList.toggle('card-flip');
             cardClicked2.classList.toggle('card-flip');
             console.log('timeout tid');
-            flipFinish = true; /*let the fuction know when the flip is complete*/
+            flipFinish = true; /*let the function know when the flip is complete*/
           }, 1000);
       }
       cardsFlipped[0] = '';
