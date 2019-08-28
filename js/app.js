@@ -54,44 +54,51 @@ function restartGame() {
   /* Adds the new symbols*/
   addSymbols(symbols, cards);
 }
-
+let flipFinish = true;
 /**
 * @description Click on a card and flip it 180deg, by toggling card-flip class on the div holding the card-sides.
 * @param {event} evt - Takes in an event object.
 */
 function flipCard (evt) {
-  const cardClicked = evt.target.parentElement;
-  const cardClickedSymbol = evt.target.nextElementSibling.firstElementChild.alt;
-
-  if(cardClicked.classList.contains('card')) {
+  if(flipFinish){
+    const cardClicked = evt.target.parentElement;
+  if(cardClicked.classList.contains('card') && !cardClicked.classList.contains('card-flip')) {
     cardClicked.classList.toggle('card-flip');
-    if(cardsFlipped[0] == '') {
+
+    /*Get the alt-text for the front-side's img/symbol*/
+    const cardClickedSymbol = evt.target.nextElementSibling.firstElementChild.alt;
+
+    if(cardsFlipped[0] == '') { /*check if any cardsymbol is set for card1 in cardsFlipped array*/
         cardsFlipped[0] = cardClickedSymbol;
         cardClicked1 = cardClicked;
         console.log(cardsFlipped);
-    } else {
+    } else { /* set cardsymbol num 2 in cardsFlipped array, if cardsymbol num 1 is already set*/
         cardsFlipped[1] = cardClickedSymbol;
         cardClicked2 = cardClicked;
-      if(isAMatch(cardsFlipped[0], cardsFlipped[1])){
+      if(isAMatch(cardsFlipped[0], cardsFlipped[1])){/* check if the two symbols match (img alt-text are the same)*/
         console.log('its a match');
       } else {
-        console.log('its not a match');
-        console.log('cardclick1 cardclick2' + cardClicked1.classList + ' ' + cardClicked2);
-        setTimeout(function () {
-          cardClicked1.classList.toggle('card-flip');
-          cardClicked2.classList.toggle('card-flip');
-          console.log('timeout tid');
-      }, 1000);
+          console.log('its not a match');
+          flipFinish = false;
+          setTimeout(function () { /*flip clicked card1 and clicked card2*/
+            cardClicked1.classList.toggle('card-flip');
+            cardClicked2.classList.toggle('card-flip');
+            console.log('timeout tid');
+            flipFinish = true; /*let the fuction know when the flip is complete*/
+          }, 1000);
       }
+      cardsFlipped[0] = '';
+      cardsFlipped[1] = '';
     }
  }
+}
 }
 
 /**
 * @description Check if two cards are the same. Has the same filename.
 * @param {img} card1 - First card's symbol/img clicked.
 * @param {img} card2 - Second card's symbol/img clicked.
-* @return {boolean} True if its a match. False if its not a match.
+* @return {boolean} True if the symbols match. False if its not a match.
 */
 function isAMatch (card1, card2) {
   let match = false;
@@ -102,8 +109,6 @@ function isAMatch (card1, card2) {
   } else {
     match = false;
   }
-  cardsFlipped[0] = '';
-  cardsFlipped[1] = '';
   return match;
 }
 
