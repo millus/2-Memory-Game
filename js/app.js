@@ -1,7 +1,4 @@
-/*
-* TODO: Add real symbols here,
-*/
-let symbols2 = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8];
+
 let symbols = [
 '001-mixer.svg','001-mixer.svg',
 '002-baker.svg','002-baker.svg',
@@ -11,6 +8,10 @@ let symbols = [
 '017-donut.svg','017-donut.svg',
 '023-whisk.svg','023-whisk.svg',
 '043-apron.svg','043-apron.svg'];
+
+const cardsFlipped = ['', ''];
+let cardClicked1;
+let cardClicked2;
 
 /*Create board*/
 const board = document.createElement('ul');
@@ -36,8 +37,14 @@ board.addEventListener('click', flipCard);
 const restartBtn = document.querySelector('.btn-restart');
 restartBtn.addEventListener('click', restartGame);
 
+/*startGame();*/
+
+function startGame () {
+
+}
+
 /**
-* @description Restarts the game by shuffling and adding symbols.
+* @description Restarts the game by flipping all cards, shuffling, adding symbols.
 */
 function restartGame() {
   /* Flip all cards so all is facing down */
@@ -53,9 +60,51 @@ function restartGame() {
 * @param {event} evt - Takes in an event object.
 */
 function flipCard (evt) {
-  if(evt.target.parentElement.classList.contains('card')) {
-   evt.target.parentElement.classList.toggle('card-flip');
+  const cardClicked = evt.target.parentElement;
+  const cardClickedSymbol = evt.target.nextElementSibling.firstElementChild.alt;
+
+  if(cardClicked.classList.contains('card')) {
+    cardClicked.classList.toggle('card-flip');
+    if(cardsFlipped[0] == '') {
+        cardsFlipped[0] = cardClickedSymbol;
+        cardClicked1 = cardClicked;
+        console.log(cardsFlipped);
+    } else {
+        cardsFlipped[1] = cardClickedSymbol;
+        cardClicked2 = cardClicked;
+      if(isAMatch(cardsFlipped[0], cardsFlipped[1])){
+        console.log('its a match');
+      } else {
+        console.log('its not a match');
+        console.log('cardclick1 cardclick2' + cardClicked1.classList + ' ' + cardClicked2);
+        setTimeout(function () {
+          cardClicked1.classList.toggle('card-flip');
+          cardClicked2.classList.toggle('card-flip');
+          console.log('timeout tid');
+      }, 1000);
+      }
+    }
+ }
+}
+
+/**
+* @description Check if two cards are the same. Has the same filename.
+* @param {img} card1 - First card's symbol/img clicked.
+* @param {img} card2 - Second card's symbol/img clicked.
+* @return {boolean} True if its a match. False if its not a match.
+*/
+function isAMatch (card1, card2) {
+  let match = false;
+  console.log('card1 ' + card1);
+  console.log('card2 ' + card2);
+  if (card1 == card2) {
+    match = true;
+  } else {
+    match = false;
   }
+  cardsFlipped[0] = '';
+  cardsFlipped[1] = '';
+  return match;
 }
 
 /**
