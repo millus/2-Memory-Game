@@ -1,4 +1,4 @@
-
+/*Making the symbols array, change file-names here if you want other images*/
 let symbols = [
 '001-mixer.svg','001-mixer.svg',
 '002-baker.svg','002-baker.svg',
@@ -9,9 +9,11 @@ let symbols = [
 '023-whisk.svg','023-whisk.svg',
 '043-apron.svg','043-apron.svg'];
 
+/*Creating flip variables*/
 const cardsFlipped = ['', ''];
 let cardClicked1;
 let cardClicked2;
+let flipFinish = true;
 
 /*Creating sound variables*/
 const success = document.querySelector('.sound-success');
@@ -57,8 +59,6 @@ function restartGame() {
   /* Adds the new symbols*/
   addSymbols(symbols, cards);
 }
-
-let flipFinish = true;
 
 /**
 * @description Click on a card and flip it 180deg, by toggling card-flip class on the div holding the card-sides.
