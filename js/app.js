@@ -13,6 +13,9 @@ const cardsFlipped = ['', ''];
 let cardClicked1;
 let cardClicked2;
 
+/*Creating sound variables*/
+const success = document.querySelector('.sound-success');
+
 /*Create board*/
 const board = document.createElement('ul');
 board.setAttribute('class', 'card-container');
@@ -62,37 +65,50 @@ let flipFinish = true;
 * @param {event} evt - Takes in an event object.
 */
 function flipCard (evt) {
-  if(flipFinish){ /*wait until flipped cards are flipped back*/
+
+  /*Wait until potentially flipped cards are flipped back*/
+  if(flipFinish){
+
+    /*Make sure the target you clicked is a card and is not already flipped over*/
     const cardClicked = evt.target.parentElement;
   if(cardClicked.classList.contains('card') && !cardClicked.classList.contains('card-flip')) {
+
+    /*Flip the clicked card*/
     cardClicked.classList.toggle('card-flip');
 
     /*Get the alt-text for the front-side's img/symbol*/
     const cardClickedSymbol = evt.target.nextElementSibling.firstElementChild.alt;
 
-    if(cardsFlipped[0] == '') { /*check if any cardsymbol is set for card1 in cardsFlipped array*/
+    /*Set card num 1 in cardsFlipped array, if the array is empty*/
+    if(cardsFlipped[0] == '') {
         cardsFlipped[0] = cardClickedSymbol;
         cardClicked1 = cardClicked;
-        console.log(cardsFlipped);
-    } else { /* set cardsymbol num 2 in cardsFlipped array, if cardsymbol num 1 is already set*/
+
+    /* Set card num 2 in cardsFlipped array*/
+    } else {
         cardsFlipped[1] = cardClickedSymbol;
         cardClicked2 = cardClicked;
-      if(isAMatch(cardsFlipped[0], cardsFlipped[1])){/* check if the two symbols match (img alt-text are the same)*/
+
+      /*Now cardsFlipped contains the two flipped cards, check if they match*/
+      if(isAMatch(cardsFlipped[0], cardsFlipped[1])){
         console.log('its a match');
-        /*TODO: maybe refactor the sound part, but it works! yay*/
-        const success = document.querySelector('.sound-success');
-        success.autoplay = true;
-        success.play();
+        success.play(); /*Yay, a match! Play a success sound*/
       } else {
           console.log('its not a match');
           flipFinish = false;
-          setTimeout(function () { /*flip clicked card1 and clicked card2*/
+
+          /*It's no match, flip the two clicked cards back*/
+          setTimeout(function () {
             cardClicked1.classList.toggle('card-flip');
             cardClicked2.classList.toggle('card-flip');
             console.log('timeout tid');
-            flipFinish = true; /*let the function know when the flip is complete*/
+
+            /*Let the function know when the flip is complete*/
+            flipFinish = true;
           }, 1000);
       }
+
+      /*Clear the two cards from the cardsFlipped array*/
       cardsFlipped[0] = '';
       cardsFlipped[1] = '';
     }

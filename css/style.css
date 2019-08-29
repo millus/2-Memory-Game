@@ -127,7 +127,7 @@ body{
 /*
  * Responsive
  */
- @media screen and (min-width: 565px) {
+ @media screen and (min-width: 510px) {
 
    .card-container {
      max-width: 600px;
@@ -139,11 +139,11 @@ body{
      height:150px;
    }
  }
- @media screen and (min-width: 330px) and (max-width: 565px) {
+ @media screen and (min-width: 330px) and (max-width: 510px) {
 
    .card-pos {
      width: 23.5%;
-     height: 95px;
+     height: 100px;
  }
 
  /* Reference: Making a 2-sided card flip. https://www.w3schools.com/howto/howto_css_flip_card.asp */
