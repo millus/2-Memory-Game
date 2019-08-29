@@ -127,7 +127,7 @@ body{
 /*
  * Responsive
  */
- @media screen and (min-width: 510px) {
+ @media screen and (min-width: 516px) {
 
    .card-container {
      max-width: 600px;
@@ -139,7 +139,7 @@ body{
      height:150px;
    }
  }
- @media screen and (min-width: 330px) and (max-width: 510px) {
+ @media screen and (min-width: 330px) and (max-width: 516px) {
 
    .card-pos {
      width: 23.5%;
