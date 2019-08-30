@@ -35,3 +35,9 @@ Go to https://millus.github.io/2-Memory-Game/ and start playing.
 - You start with 3 stars, try to keep all of them till the end.
 
 TODO: write about the time aspect as well in the readme.
+
+# References:
+- Create a modal: https://medium.com/@nerdplusdog/a-how-to-guide-for-modal-boxes-with-javascript-html-and-css-6a49d063987e 
+- Flip a 2-sided card: https://www.w3schools.com/howto/howto_css_flip_card.asp
+- Randomized shuffle: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array/2450976#2450976
+
