@@ -10,13 +10,13 @@ let symbols = [
 '043-apron.svg','043-apron.svg'];
 
 symbols = shuffleCards(symbols);
-const numOfSymbols = symbols.length;
+const totNumOfSymbols = symbols.length;
 
 /*Create board and cards first off-screen, add it to the .game-board section, add symbols to .card divs*/
 const board = document.createElement('ul');
 board.setAttribute('class', 'card-container');
 board.addEventListener('click', flipCard);
-createCards(numOfSymbols, board);
+createCards(totNumOfSymbols, board);
 document.querySelector('.game-board').appendChild(board);
 const cards = document.querySelectorAll('.card');
 addSymbols(symbols, cards);
@@ -34,10 +34,20 @@ let flipCardsBackComplete = true;
 /*Creating sound variables*/
 const success = document.querySelector('.sound-success');
 
-/*startGame();*/
-
-function startGame () {
-
+/*Modal*/
+const modalBtn = document.getElementById("modal-btn")
+const modal = document.querySelector(".modal")
+const closeBtn = document.querySelector(".close-btn")
+modalBtn.onclick = function(){
+  modal.style.display = "flex"
+}
+closeBtn.onclick = function(){
+  modal.style.display = "none"
+}
+window.onclick = function(e){
+  if(e.target == modal){
+    modal.style.display = "none"
+  }
 }
 
 /**
@@ -118,9 +128,9 @@ function flipAllCards (cards) {
 * @param {ul} board - The card-container representing the board.
 * @see https://www.w3schools.com/howto/howto_css_flip_card.asp
 */
-function createCards(numOfSymbols, board) {
+function createCards(totNumOfSymbols, board) {
 
-  while(numOfSymbols > 0) {
+  while(totNumOfSymbols > 0) {
 
     /* Creates the elements needed to build a flipping card */
     const cardPos = document.createElement("li"); /* the card pos on the board */
@@ -140,7 +150,7 @@ function createCards(numOfSymbols, board) {
     card.appendChild(cardDown);
     board.appendChild(cardPos);
 
-    numOfSymbols--;
+    totNumOfSymbols--;
   }
 }
 

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href="https://fonts.googleapis.com/css?family=Nunito&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Bree+Serif&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <title>Memory Game</title>
 </head>
@@ -12,18 +13,40 @@
   <a class="back-link" href="https://millus.github.io/1-Build-A-Portfolio-Site">← Camilla's portfolio</a>
 
   <header class="header-container">
-    <h1>Memory Game</h1>
+    <h1>MEMORY GAME</h1>
   </header>
 
   <section class="game-container">
-
     <section class="game-controls">
         <button class="btn-restart" type="button">Restart game</button>
     </section>
-
     <section class="game-board">
     </section>
+  </section>
 
+  <button id="modal-btn"> click me, I make a modal</button>
+  <section class="modal">
+    <section class="modal-content">
+        <div class="close-btn">X</div>
+        <h1 class="modal-header">CAKE COMPLETE</h1>
+        <img class="modal-img" src="img/winner.svg" alt="illustration of cake"><img>
+        <section class="results-container">
+          <section class="result-item">
+            <p class="result-label">Time: </p>
+            <span class="result-value">00:00</span>
+          </section>
+          <section class="result-item">
+            <p class="result-label">Moves: </p>
+            <span class="result-value">100</span>
+          </section>
+          <section class="result-item">
+            <p class="result-labels">Score: </p>
+            <img class="star" src="img/star-filled.svg" alt=star-filled></img>
+            <img class="star" src="img/star-filled.svg" alt=star-filled></img>
+            <img class="star" src="img/star-empty.svg" alt=star-filled></img>
+          </section>
+        </section>
+    </section>
   </section>
 
   <footer class="footer-container">
