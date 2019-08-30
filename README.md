@@ -1,5 +1,5 @@
 # Memory Game
-Reveal all card pairs as fast as you can without losing any stars.
+Find all card pairs as fast as you can without losing any stars.
 
 ## How do I start the game?
 1. Download this project
