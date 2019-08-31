@@ -28,10 +28,10 @@ body{
  * Header
  */
 .header-container {
-  width: 600px;
+  max-width: 600px;
   margin: auto;
   text-align: center;
-  font-size: 1.6em;
+  font-size: 1em;
 }
 
 /*
@@ -224,6 +224,10 @@ h1 {
  * Responsive
  */
 @media screen and (min-width: 500px) {
+
+  .header-container {
+    font-size: 1.6em;
+  }
 
   .card-container {
     max-width: 600px;
