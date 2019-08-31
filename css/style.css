@@ -28,9 +28,10 @@ body{
  * Header
  */
 .header-container {
-  width: 300px;
+  width: 600px;
   margin: auto;
   text-align: center;
+  font-size: 1.6em;
 }
 
 /*
@@ -48,12 +49,19 @@ body{
     display: flex;
     flex-wrap: no-wrap;
     padding: 5px;
+    background-color: #fff;
+    width: 97%;
+    margin: auto;
+    margin-bottom: 5px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 1px solid #d7d7d7;
  }
 
  .btn-restart{
-  padding: 8px 16px;
-  border-radius: 4px;
-  margin:auto;
+   font-size: 1em;
+   border-radius: 4px;
+   margin-left: 40px;
  }
 
 /*
@@ -153,11 +161,10 @@ body{
    border-radius: 16px;
    border: 5px solid #fff;
    text-align: center;
-   /*
-   -webkit-box-shadow: 0px 0px 55px -9px rgba(106,210,255,1);
-   -moz-box-shadow: 0px 0px 55px -9px rgba(106,210,255,1);
-   box-shadow: 0px 0px 55px -9px rgba(106,210,255,1);*/
-   background-image: linear-gradient(180deg, #E6ECFF 0%, #FFCFCF 84%);
+   background-color: #fff;
+   /*background-image: linear-gradient(180deg, #E6ECFF 0%, #FFCFCF 84%);*/
+  box-shadow: 0 0 64px 20px rgba(0,0,0,0.11);
+  border-radius: 36px;
 }
 
 h1 {
@@ -183,6 +190,8 @@ h1 {
 }
 
 .results-container {
+  font-family: 'Bree Serif', serif;
+  letter-spacing: 0.1em;
   width: 100%;
   display: flex;
   text-align: left;
@@ -193,15 +202,18 @@ h1 {
 
 .result-item {
   width: 33%;
-  border-bottom: 1px solid #000;
+  border: 1px solid #d7d7d7;
+  border-radius: 16px;
   margin: 6px;
   padding: 5px;
   height: 100px;
+  text-align: center;
 }
 
 .result-value {
    width: 100%;
    font-size: 1.5em;
+   font-family: Nunito;
 }
 
 .star {

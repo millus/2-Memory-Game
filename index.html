@@ -18,13 +18,13 @@
 
   <section class="game-container">
     <section class="game-controls">
-        <button class="btn-restart" type="button">Restart game</button>
+      <p class="result-label">Moves: <span class="moves">0</span></p>
+      <button class="btn-restart" type="button">Restart game</button>
     </section>
     <section class="game-board">
     </section>
   </section>
 
-  <button id="modal-btn"> click me, I make a modal</button>
   <section class="modal">
     <section class="modal-content">
         <div class="close-btn">X</div>
@@ -33,14 +33,14 @@
         <section class="results-container">
           <section class="result-item">
             <p class="result-label">Time: </p>
-            <span class="result-value">00:00</span>
+            <span class="result-value tot-time">00:00</span>
           </section>
           <section class="result-item">
             <p class="result-label">Moves: </p>
-            <span class="result-value">100</span>
+            <span class="result-value tot-moves">100</span>
           </section>
-          <section class="result-item">
-            <p class="result-labels">Score: </p>
+          <section class="result-item star-result">
+            <p class="result-label">Score: </p>
             <img class="star" src="img/star-filled.svg" alt=star-filled></img>
             <img class="star" src="img/star-filled.svg" alt=star-filled></img>
             <img class="star" src="img/star-empty.svg" alt=star-filled></img>

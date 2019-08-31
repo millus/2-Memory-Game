@@ -34,30 +34,54 @@ let flipCardsBackComplete = true;
 /*Creating sound variables*/
 const success = document.querySelector('.sound-success');
 
-/*Modal*/
-const modalBtn = document.getElementById("modal-btn")
-const modal = document.querySelector(".modal")
-const closeBtn = document.querySelector(".close-btn")
-modalBtn.onclick = function(){
-  modal.style.display = "flex"
-}
+/*Modal*/ /*TODO: fix this in a functin*/
+
+const modal = document.querySelector(".modal");
+const closeBtn = document.querySelector(".close-btn");
 closeBtn.onclick = function(){
-  modal.style.display = "none"
+  modal.style.display = "none";
 }
+
+/*TODO: include this or not
 window.onclick = function(e){
   if(e.target == modal){
     modal.style.display = "none"
   }
+}*/
+
+function showEndResults (numOfMoves) {
+  const winningImg = document.querySelector('.modal-img');
+  const totalMoves = document.querySelector('.tot-moves');
+  const totalStars = document.querySelector('.star-result');
+  totalMoves.textContent = numOfMoves;
+  if (numOfMoves < 20) {
+    winningImg.src = "img/winner.svg";
+
+  } else if (numOfMoves < 40) {
+    winningImg.src = "img/winner-2.svg";
+  } else if (numOfMoves < 60) {
+    winningImg.src = "img/winner-1.svg";
+  } else {
+    winningImg.src = "img/winner-0.svg";
+  }
+
+  modal.style.display = "flex";
 }
 
 /**
 * @description Restarts the game by flipping all cards, shuffling, adding symbols.
 */
 function restartGame() {
+  numOfMoves = 0;
+  currentMoves.textContent = numOfMoves;
   flipAllCards(cards);
   symbols = shuffleCards(symbols); /*TODO: make the shuffle happen later so the cards dont show*/
   addSymbols(symbols, cards);
 }
+
+let numOfMatches = 0;
+let numOfMoves = 0;
+const currentMoves = document.querySelector('.moves');
 
 /**
 * @description Flips the card you click 180deg, and checking whether the two cards flipped are a match or not.
@@ -69,6 +93,8 @@ function flipCard (evt) {
     if(cardClicked.classList.contains('card') && !cardClicked.classList.contains('card-flip')) {
       cardClicked.classList.add('card-flip');
       const cardClickedSymbol = evt.target.nextElementSibling.firstElementChild.src;
+      numOfMoves++;
+      currentMoves.textContent = numOfMoves;
       if(cardsFlipped[0] == '') {
         cardsFlipped[0] = cardClickedSymbol;
         cardClicked1 = cardClicked;
@@ -78,6 +104,11 @@ function flipCard (evt) {
         if(isAMatch(cardsFlipped[0], cardsFlipped[1])) {
         console.log('its a match');
         success.play();
+        numOfMatches++;
+        if(numOfMatches == symbols.length/2) {
+          console.log('winning');
+          showEndResults(numOfMoves);
+        }
       } else {
           console.log('its not a match');
           flipCardsBackComplete = false;
