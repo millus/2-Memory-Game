@@ -93,14 +93,14 @@ function flipCard (evt) {
     if(cardClicked.classList.contains('card') && !cardClicked.classList.contains('card-flip')) {
       cardClicked.classList.add('card-flip');
       const cardClickedSymbol = evt.target.nextElementSibling.firstElementChild.src;
-      numOfMoves++;
-      currentMoves.textContent = numOfMoves;
       if(cardsFlipped[0] == '') {
         cardsFlipped[0] = cardClickedSymbol;
         cardClicked1 = cardClicked;
       } else {
         cardsFlipped[1] = cardClickedSymbol;
         cardClicked2 = cardClicked;
+        numOfMoves++;
+        currentMoves.textContent = numOfMoves;
         if(isAMatch(cardsFlipped[0], cardsFlipped[1])) {
         console.log('its a match');
         success.play();
