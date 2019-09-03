@@ -50,11 +50,22 @@ body{
     flex-wrap: no-wrap;
     padding: 5px;
     background-color: #fff;
-    width: 97%;
+    width: 100%;
     margin: auto;
     margin-bottom: 5px;
-    padding: 10px 20px;
     border-radius: 8px;
+ }
+
+ .stars {
+   display: inline-block;
+   padding-top: 2px;
+ }
+
+ .result-label {
+   line-height: 1em;
+   display: flex;
+   flex-wrap: wrap;
+   width: 25%;
  }
 
  .btn-restart{
@@ -244,13 +255,16 @@ h1 {
 
   .modal-content {
     max-width: 600px;
-    width: 80%;
     height: auto;
     border-radius: 16px;
   }
 
   .modal-img {
     height: 30%;
+  }
+
+  .game-controls {
+    padding: 10px 20px;
   }
 
   .result-value {

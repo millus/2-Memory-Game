@@ -42,6 +42,23 @@ closeBtn.onclick = function(){
   modal.style.display = "none";
 }
 
+function updateNumOfStars(numOfMoves) {
+  const stars = document.querySelector('.game-controls').querySelectorAll('.star');
+  let numOfStars;
+  if (numOfMoves <= totNumOfSymbols) {
+    numOfStars = 3;
+  } else if (numOfMoves < totNumOfSymbols*2) {
+    numOfStars = 2;
+  } else {
+    numOfStars = 1;
+  }
+
+  if(numOfStars < stars.length) {
+    stars.item(numOfStars).src = "img/star-empty.svg";
+  }
+  return numOfStars;
+}
+
 /*TODO: include this or not
 window.onclick = function(e){
   if(e.target == modal){
@@ -52,19 +69,17 @@ window.onclick = function(e){
 function showEndResults (numOfMoves) {
   const winningImg = document.querySelector('.modal-img');
   const totalMoves = document.querySelector('.tot-moves');
-  const totalStars = document.querySelector('.star-result');
+  const totNumOfStars = updateNumOfStars(numOfMoves);
   totalMoves.textContent = numOfMoves;
-  if (numOfMoves < 20) {
+  if (totNumOfStars == 3 && numOfMoves == totNumOfSymbols) { /*perfect run*/
+    winningImg.src = "img/winner-perfect.svg";
+  } else if (totNumOfStars == 3) {
     winningImg.src = "img/winner-3.svg";
-
-  } else if (numOfMoves < 40) {
+  } else if (totNumOfStars == 2) {
     winningImg.src = "img/winner-2.svg";
-  } else if (numOfMoves < 60) {
+  } else if (totNumOfStars == 1) {
     winningImg.src = "img/winner-1.svg";
-  } else {
-    winningImg.src = "img/winner-0.svg";
   }
-
   modal.style.display = "flex";
 }
 
@@ -101,6 +116,7 @@ function flipCard (evt) {
         cardClicked2 = cardClicked;
         numOfMoves++;
         currentMoves.textContent = numOfMoves;
+        updateNumOfStars(numOfMoves);
         if(isAMatch(cardsFlipped[0], cardsFlipped[1])) {
         console.log('its a match');
         success.play();
@@ -133,8 +149,6 @@ function flipCard (evt) {
 */
 function isAMatch (card1, card2) {
   let match = false;
-  console.log('card1 ' + card1);
-  console.log('card2 ' + card2);
   if (card1 == card2) {
     match = true;
   } else {
