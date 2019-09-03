@@ -55,7 +55,7 @@ function showEndResults (numOfMoves) {
   const totalStars = document.querySelector('.star-result');
   totalMoves.textContent = numOfMoves;
   if (numOfMoves < 20) {
-    winningImg.src = "img/winner.svg";
+    winningImg.src = "img/winner-3.svg";
 
   } else if (numOfMoves < 40) {
     winningImg.src = "img/winner-2.svg";
