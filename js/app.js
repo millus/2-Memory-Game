@@ -42,8 +42,7 @@ closeBtn.onclick = function(){
   modal.style.display = "none";
 }
 
-function updateNumOfStars(numOfMoves) {
-  const stars = document.querySelector('.game-controls').querySelectorAll('.star');
+function getNumOfStars(numOfMoves) {
   let numOfStars;
   if (numOfMoves <= totNumOfSymbols) {
     numOfStars = 3;
@@ -52,26 +51,27 @@ function updateNumOfStars(numOfMoves) {
   } else {
     numOfStars = 1;
   }
-
-  if(numOfStars < stars.length) {
-    stars.item(numOfStars).src = "img/star-empty.svg";
-  }
   return numOfStars;
 }
 
-/*TODO: include this or not
-window.onclick = function(e){
-  if(e.target == modal){
-    modal.style.display = "none"
+function setNumOfStars(numOfStars, starContainer) {
+  const stars = starContainer.querySelectorAll('.star');
+  if(numOfStars < stars.length) {
+    stars.item(numOfStars).src = "img/star-empty.svg";
   }
-}*/
+}
 
 function showEndResults (numOfMoves) {
   const winningImg = document.querySelector('.modal-img');
   const totalMoves = document.querySelector('.tot-moves');
-  const totNumOfStars = updateNumOfStars(numOfMoves);
+  const starContainer = document.querySelector('.star-result');
+  const totNumOfStars = getNumOfStars(numOfMoves);
+
   totalMoves.textContent = numOfMoves;
-  if (totNumOfStars == 3 && numOfMoves == totNumOfSymbols) { /*perfect run*/
+  setNumOfStars(totNumOfStars, starContainer);
+  console.log('moves:' + numOfMoves);
+  console.log('symbols: ' + totNumOfSymbols/2);
+  if (totNumOfStars == 3 && numOfMoves == (totNumOfSymbols/2)) { /*perfect run*/
     winningImg.src = "img/winner-perfect.svg";
   } else if (totNumOfStars == 3) {
     winningImg.src = "img/winner-3.svg";
@@ -97,6 +97,12 @@ function restartGame() {
 let numOfMatches = 0;
 let numOfMoves = 0;
 const currentMoves = document.querySelector('.moves');
+const currentStars = document.querySelector('.game-controls');
+
+function updateCurrentScore(numOfMoves) {
+  currentMoves.textContent = numOfMoves;
+  setNumOfStars(getNumOfStars(numOfMoves), currentStars);
+}
 
 /**
 * @description Flips the card you click 180deg, and checking whether the two cards flipped are a match or not.
@@ -115,13 +121,12 @@ function flipCard (evt) {
         cardsFlipped[1] = cardClickedSymbol;
         cardClicked2 = cardClicked;
         numOfMoves++;
-        currentMoves.textContent = numOfMoves;
-        updateNumOfStars(numOfMoves);
+        updateCurrentScore(numOfMoves);
         if(isAMatch(cardsFlipped[0], cardsFlipped[1])) {
         console.log('its a match');
         success.play();
         numOfMatches++;
-        if(numOfMatches == symbols.length/2) {
+        if(numOfMatches == totNumOfSymbols/2) {
           console.log('winning');
           showEndResults(numOfMoves);
         }
