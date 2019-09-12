@@ -22,10 +22,7 @@ closeModalBtn.addEventListener('click', function(){
 let numOfMoves = 0;
 const currentMoves = document.querySelector('.moves');
 const currentStars = document.querySelector('.game-controls');
-
-/*Adding a restart btn with an event listener*/
 const restartBtn = document.querySelector('.btn-restart');
-restartBtn.addEventListener('click', restartGame);
 
 /*Creating flip variables*/
 const cardsFlipped = ['', ''];
@@ -43,26 +40,28 @@ function setupGame() {
   modal.classList = 'hide';
   numOfMoves = 0;
   symbols = shuffleCards(symbols);
-  createBoardWithSymbols();
+  createBoardWithCards();
+  const cards = document.querySelectorAll('.card');
+  addSymbols(symbols, cards);
+  restartBtn.addEventListener('click', restartGame(cards)); /*TODO: fix restart button not responding*/
 }
 
 /**
-* @description Create board and cards first off-screen, then add them to the DOM with symbols.
+* @description Create board and cards first off-screen, then add them to the DOM.
 */
-function createBoardWithSymbols () {
+function createBoardWithCards () {
   const board = document.createElement('ul');
   board.setAttribute('class', 'card-container');
   board.addEventListener('click', flipCard);
   createCards(totNumOfSymbols, board);
   document.querySelector('.game-board').appendChild(board);
-  const cards = document.querySelectorAll('.card');
-  addSymbols(symbols, cards);
 }
 
 /**
 * @description Restarts the game by flipping all cards, shuffling, adding symbols.
+* @param {array} cards - The existing cards on the game board.
 */
-function restartGame() {
+function restartGame(cards) {
   modal.classList = 'hide';
   numOfMoves = 0;
   updateCurrentScore(numOfMoves);
