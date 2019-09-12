@@ -162,7 +162,7 @@ body{
  * Modal
  */
 .modal {
-  display: none;
+  display: flex;
   position: fixed;
   left: 0;
   top: 0;

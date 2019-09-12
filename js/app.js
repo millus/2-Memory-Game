@@ -9,17 +9,19 @@ let symbols = [
 '023-whisk.svg','023-whisk.svg',
 '043-apron.svg','043-apron.svg'];
 
-symbols = shuffleCards(symbols);
 const totNumOfSymbols = symbols.length;
 
-/*Create board and cards first off-screen, add it to the .game-board section, add symbols to .card divs*/
-const board = document.createElement('ul');
-board.setAttribute('class', 'card-container');
-board.addEventListener('click', flipCard);
-createCards(totNumOfSymbols, board);
-document.querySelector('.game-board').appendChild(board);
-const cards = document.querySelectorAll('.card');
-addSymbols(symbols, cards);
+/*Modal variables*/
+const modal = document.querySelector(".modal");
+const closeModalBtn = document.querySelector(".close-btn");
+closeModalBtn.addEventListener('click', function(){
+  modal.classList = 'hide';
+});
+
+/*Creating score variables*/
+let numOfMoves = 0;
+const currentMoves = document.querySelector('.moves');
+const currentStars = document.querySelector('.game-controls');
 
 /*Adding a restart btn with an event listener*/
 const restartBtn = document.querySelector('.btn-restart');
@@ -34,12 +36,39 @@ let flipCardsBackComplete = true;
 /*Creating sound variables*/
 const success = document.querySelector('.sound-success');
 
-/*Modal*/ /*TODO: fix this in a functin*/
+/*, set all score values to 0*/
+setupGame();
 
-const modal = document.querySelector(".modal");
-const closeBtn = document.querySelector(".close-btn");
-closeBtn.onclick = function(){
-  modal.style.display = "none";
+function setupGame() {
+  modal.classList = 'hide';
+  numOfMoves = 0;
+  symbols = shuffleCards(symbols);
+  createBoardWithSymbols();
+}
+
+/**
+* @description Create board and cards first off-screen, then add them to the DOM with symbols.
+*/
+function createBoardWithSymbols () {
+  const board = document.createElement('ul');
+  board.setAttribute('class', 'card-container');
+  board.addEventListener('click', flipCard);
+  createCards(totNumOfSymbols, board);
+  document.querySelector('.game-board').appendChild(board);
+  const cards = document.querySelectorAll('.card');
+  addSymbols(symbols, cards);
+}
+
+/**
+* @description Restarts the game by flipping all cards, shuffling, adding symbols.
+*/
+function restartGame() {
+  modal.classList = 'hide';
+  numOfMoves = 0;
+  updateCurrentScore(numOfMoves);
+  flipAllCards(cards);
+  symbols = shuffleCards(symbols); /*TODO: make the shuffle happen later so the cards dont show*/
+  addSymbols(symbols, cards);
 }
 
 /**
@@ -94,24 +123,8 @@ function showEndResults (numOfMoves) {
   } else if (totNumOfStars == 1) {
     winningImg.src = "img/winner-1.svg";
   }
-  modal.style.display = "flex";
+  modal.classList = 'modal';
 }
-
-/**
-* @description Restarts the game by flipping all cards, shuffling, adding symbols.
-*/
-function restartGame() {
-  numOfMoves = 0;
-  currentMoves.textContent = numOfMoves;
-  flipAllCards(cards);
-  symbols = shuffleCards(symbols); /*TODO: make the shuffle happen later so the cards dont show*/
-  addSymbols(symbols, cards);
-}
-
-let numOfMatches = 0;
-let numOfMoves = 0;
-const currentMoves = document.querySelector('.moves');
-const currentStars = document.querySelector('.game-controls');
 
 /**
 * @description Display and update the current moves and stars continously as the player flip new cards.
@@ -121,6 +134,8 @@ function updateCurrentScore(numOfMoves) {
   currentMoves.textContent = numOfMoves;
   setNumOfStars(getNumOfStars(numOfMoves), currentStars);
 }
+
+let numOfMatches = 0;
 
 /**
 * @description Flips the card you click 180deg, and checking whether the two cards flipped are a match or not.
