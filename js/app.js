@@ -42,6 +42,11 @@ closeBtn.onclick = function(){
   modal.style.display = "none";
 }
 
+/**
+* @description Returns the number of stars based on the number of moves the player has taken to flip cards.
+* @param {number} numOfMoves - The number of moves the player has used in the game so far.
+* @return {number} The number of stars the player now has. 3 is good (few moves), 1 is bad (many moves).
+*/
 function getNumOfStars(numOfMoves) {
   let numOfStars;
   if (numOfMoves <= totNumOfSymbols) {
@@ -54,6 +59,11 @@ function getNumOfStars(numOfMoves) {
   return numOfStars;
 }
 
+/**
+* @description Update the number of stars visible for the player.
+* @param {number} numOfStars - The number of stars to be set as the new value in the UI.
+* @param {object} starContainer - The div element in the DOM which have stars to be updated.
+*/
 function setNumOfStars(numOfStars, starContainer) {
   const stars = starContainer.querySelectorAll('.star');
   if(numOfStars < stars.length) {
@@ -61,6 +71,10 @@ function setNumOfStars(numOfStars, starContainer) {
   }
 }
 
+/**
+* @description Show a modal when the game ends, displaying the time, stars and number of moves the player used in the game.
+* @param {number} numOfMoves - The number of moves the player has used.
+*/
 function showEndResults (numOfMoves) {
   const winningImg = document.querySelector('.modal-img');
   const totalMoves = document.querySelector('.tot-moves');
@@ -99,6 +113,10 @@ let numOfMoves = 0;
 const currentMoves = document.querySelector('.moves');
 const currentStars = document.querySelector('.game-controls');
 
+/**
+* @description Display and update the current moves and stars continously as the player flip new cards.
+* @param {number} numOfMoves - Number of moves the player currently have conducted in the game.
+*/
 function updateCurrentScore(numOfMoves) {
   currentMoves.textContent = numOfMoves;
   setNumOfStars(getNumOfStars(numOfMoves), currentStars);

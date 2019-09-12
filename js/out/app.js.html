@@ -62,29 +62,92 @@ let flipCardsBackComplete = true;
 /*Creating sound variables*/
 const success = document.querySelector('.sound-success');
 
-/*Modal*/
-let modalBtn = document.getElementById("modal-btn")
-let modal = document.querySelector(".modal")
-let closeBtn = document.querySelector(".close-btn")
-modalBtn.onclick = function(){
-  modal.style.display = "block"
-}
+/*Modal*/ /*TODO: fix this in a functin*/
+
+const modal = document.querySelector(".modal");
+const closeBtn = document.querySelector(".close-btn");
 closeBtn.onclick = function(){
-  modal.style.display = "none"
+  modal.style.display = "none";
 }
-window.onclick = function(e){
-  if(e.target == modal){
-    modal.style.display = "none"
+
+/**
+* @description Returns the number of stars based on the number of moves the player has taken to flip cards.
+* @param {number} numOfMoves - The number of moves the player has used in the game so far.
+* @return {number} The number of stars the player now has. 3 is good (few moves), 1 is bad (many moves).
+*/
+function getNumOfStars(numOfMoves) {
+  let numOfStars;
+  if (numOfMoves &lt;= totNumOfSymbols) {
+    numOfStars = 3;
+  } else if (numOfMoves &lt; totNumOfSymbols*2) {
+    numOfStars = 2;
+  } else {
+    numOfStars = 1;
   }
+  return numOfStars;
+}
+
+/**
+* @description Update the number of stars visible for the player.
+* @param {number} numOfStars - The number of stars to be set as the new value in the UI.
+* @param {object} starContainer - The div element in the DOM which have stars to be updated.
+*/
+function setNumOfStars(numOfStars, starContainer) {
+  const stars = starContainer.querySelectorAll('.star');
+  if(numOfStars &lt; stars.length) {
+    stars.item(numOfStars).src = "img/star-empty.svg";
+  }
+}
+
+/**
+* @description Show a modal when the game ends, displaying the time, stars and number of moves the player used in the game.
+* @param {number} numOfMoves - The number of moves the player has used.
+*/
+function showEndResults (numOfMoves) {
+  const winningImg = document.querySelector('.modal-img');
+  const totalMoves = document.querySelector('.tot-moves');
+  const starContainer = document.querySelector('.star-result');
+  const totNumOfStars = getNumOfStars(numOfMoves);
+
+  totalMoves.textContent = numOfMoves;
+  setNumOfStars(totNumOfStars, starContainer);
+  console.log('moves:' + numOfMoves);
+  console.log('symbols: ' + totNumOfSymbols/2);
+  if (totNumOfStars == 3 &amp;&amp; numOfMoves == (totNumOfSymbols/2)) { /*perfect run*/
+    winningImg.src = "img/winner-perfect.svg";
+  } else if (totNumOfStars == 3) {
+    winningImg.src = "img/winner-3.svg";
+  } else if (totNumOfStars == 2) {
+    winningImg.src = "img/winner-2.svg";
+  } else if (totNumOfStars == 1) {
+    winningImg.src = "img/winner-1.svg";
+  }
+  modal.style.display = "flex";
 }
 
 /**
 * @description Restarts the game by flipping all cards, shuffling, adding symbols.
 */
 function restartGame() {
+  numOfMoves = 0;
+  currentMoves.textContent = numOfMoves;
   flipAllCards(cards);
   symbols = shuffleCards(symbols); /*TODO: make the shuffle happen later so the cards dont show*/
   addSymbols(symbols, cards);
+}
+
+let numOfMatches = 0;
+let numOfMoves = 0;
+const currentMoves = document.querySelector('.moves');
+const currentStars = document.querySelector('.game-controls');
+
+/**
+* @description Display and update the current moves and stars continously as the player flip new cards.
+* @param {number} numOfMoves - Number of moves the player currently have conducted in the game.
+*/
+function updateCurrentScore(numOfMoves) {
+  currentMoves.textContent = numOfMoves;
+  setNumOfStars(getNumOfStars(numOfMoves), currentStars);
 }
 
 /**
@@ -103,9 +166,16 @@ function flipCard (evt) {
       } else {
         cardsFlipped[1] = cardClickedSymbol;
         cardClicked2 = cardClicked;
+        numOfMoves++;
+        updateCurrentScore(numOfMoves);
         if(isAMatch(cardsFlipped[0], cardsFlipped[1])) {
         console.log('its a match');
         success.play();
+        numOfMatches++;
+        if(numOfMatches == totNumOfSymbols/2) {
+          console.log('winning');
+          showEndResults(numOfMoves);
+        }
       } else {
           console.log('its not a match');
           flipCardsBackComplete = false;
@@ -130,8 +200,6 @@ function flipCard (evt) {
 */
 function isAMatch (card1, card2) {
   let match = false;
-  console.log('card1 ' + card1);
-  console.log('card2 ' + card2);
   if (card1 == card2) {
     match = true;
   } else {
@@ -234,13 +302,13 @@ function shuffleCards(symbols) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addSymbols">addSymbols</a></li><li><a href="global.html#createCards">createCards</a></li><li><a href="global.html#flipAllCards">flipAllCards</a></li><li><a href="global.html#flipCard">flipCard</a></li><li><a href="global.html#isAMatch">isAMatch</a></li><li><a href="global.html#restartGame">restartGame</a></li><li><a href="global.html#shuffleCards">shuffleCards</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addSymbols">addSymbols</a></li><li><a href="global.html#createCards">createCards</a></li><li><a href="global.html#flipAllCards">flipAllCards</a></li><li><a href="global.html#flipCard">flipCard</a></li><li><a href="global.html#getNumOfStars">getNumOfStars</a></li><li><a href="global.html#isAMatch">isAMatch</a></li><li><a href="global.html#restartGame">restartGame</a></li><li><a href="global.html#setNumOfStars">setNumOfStars</a></li><li><a href="global.html#showEndResults">showEndResults</a></li><li><a href="global.html#shuffleCards">shuffleCards</a></li><li><a href="global.html#updateCurrentScore">updateCurrentScore</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Fri Aug 30 2019 14:31:30 GMT+0200 (CEST)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Thu Sep 12 2019 11:12:00 GMT+0200 (CEST)
 </footer>
 
 <script> prettyPrint(); </script>
