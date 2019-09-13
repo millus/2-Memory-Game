@@ -15,7 +15,7 @@ let cards = 0;
 /*Modal variables*/
 const modal = document.querySelector(".modal-content").parentElement;
 const closeModalBtn = document.querySelector(".close-btn");
-const playAgainBtn = modal.querySelector('.btn-restart');
+const playAgainBtn = modal.querySelector('.btn-play-again');
 playAgainBtn.addEventListener('click', restartGame);
 closeModalBtn.addEventListener('click', function(){
   modal.classList = 'hide';
@@ -23,8 +23,12 @@ closeModalBtn.addEventListener('click', function(){
 
 /*Creating score variables*/
 let numOfMoves = 0;
+let numOfSeconds = 0;
+let numOfMinutes = 0;
+let timer = 0;
 const currentMoves = document.querySelector('.moves');
 const currentStars = document.querySelector('.game-controls');
+const currentTime = document.querySelector('.time');
 const restartBtn = document.querySelector('.btn-restart');
 
 /*Creating flip variables*/
@@ -47,6 +51,7 @@ function setupGame() {
   cards = document.querySelectorAll('.card');
   addSymbols(symbols, cards);
   restartBtn.addEventListener('click', restartGame);
+  timer = setInterval(updateTime, 1000);
 }
 
 /**
@@ -64,13 +69,35 @@ function createBoardWithCards () {
 * @description Restarts the game by flipping all cards, shuffling, adding symbols.
 */
 function restartGame() {
+  clearInterval(timer);
   modal.classList = 'hide';
   numOfMoves = 0;
   numOfMatches = 0;
+  numOfSeconds = 0;
+  numOfMinutes = 0;
+  timer = setInterval(updateTime, 1000);
   updateCurrentScore(numOfMoves);
   flipAllCards(cards);
   symbols = shuffleCards(symbols); /*TODO: make the shuffle happen later so the cards dont show*/
   addSymbols(symbols, cards);
+}
+
+/**
+* @description Formats the timer output as minutes and seconds 00:00. This function is used in setInterval, which counts every second.
+*/
+function updateTime () {
+  if(numOfSeconds < 10){
+    currentTime.innerHTML = `00:0${numOfSeconds}`;
+  } else if(numOfSeconds >= 10 && numOfSeconds < 60 && numOfMinutes < 9){
+    currentTime.innerHTML = `0${numOfMinutes}:${numOfSeconds}`;
+  } else if (numOfSeconds = 60){
+    numOfMinutes++;
+    numOfSeconds = 0;
+    if (numOfMinutes > 9) {
+      currentTime.innerHTML = `${numOfMinutes}:${numOfSeconds}`;
+    }
+  }
+  numOfSeconds++;
 }
 
 /**
@@ -118,13 +145,13 @@ function setNumOfStars(numOfStars, starContainer) {
 function showEndResults (numOfMoves) {
   const winningImg = document.querySelector('.modal-img');
   const totalMoves = document.querySelector('.tot-moves');
+  const totalTime = document.querySelector('.tot-time');
   const starContainer = document.querySelector('.star-result');
   const totNumOfStars = getNumOfStars(numOfMoves);
-
+  clearInterval(timer);
   totalMoves.textContent = numOfMoves;
+  totalTime.textContent = currentTime.textContent;
   setNumOfStars(totNumOfStars, starContainer);
-  console.log('moves:' + numOfMoves);
-  console.log('symbols: ' + totNumOfSymbols/2);
   if (totNumOfStars == 3 && numOfMoves == (totNumOfSymbols/2)) { /*perfect run*/
     winningImg.src = "img/winner-perfect.svg";
   } else if (totNumOfStars == 3) {
