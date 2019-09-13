@@ -10,6 +10,7 @@ let symbols = [
 '043-apron.svg','043-apron.svg'];
 
 const totNumOfSymbols = symbols.length;
+let cards = 0;
 
 /*Modal variables*/
 const modal = document.querySelector(".modal");
@@ -33,17 +34,18 @@ let flipCardsBackComplete = true;
 /*Creating sound variables*/
 const success = document.querySelector('.sound-success');
 
-/*, set all score values to 0*/
+
 setupGame();
+
 
 function setupGame() {
   modal.classList = 'hide';
   numOfMoves = 0;
   symbols = shuffleCards(symbols);
   createBoardWithCards();
-  const cards = document.querySelectorAll('.card');
+  cards = document.querySelectorAll('.card');
   addSymbols(symbols, cards);
-  restartBtn.addEventListener('click', restartGame(cards)); /*TODO: fix restart button not responding*/
+  restartBtn.addEventListener('click', restartGame);
 }
 
 /**
@@ -59,9 +61,8 @@ function createBoardWithCards () {
 
 /**
 * @description Restarts the game by flipping all cards, shuffling, adding symbols.
-* @param {array} cards - The existing cards on the game board.
 */
-function restartGame(cards) {
+function restartGame() {
   modal.classList = 'hide';
   numOfMoves = 0;
   updateCurrentScore(numOfMoves);
@@ -77,6 +78,8 @@ function restartGame(cards) {
 */
 function getNumOfStars(numOfMoves) {
   let numOfStars;
+  console.log('NUM OF MOVES ' +  numOfMoves);
+  console.log('SYMBOLS ' + totNumOfSymbols);
   if (numOfMoves <= totNumOfSymbols) {
     numOfStars = 3;
   } else if (numOfMoves < totNumOfSymbols*2) {
@@ -94,8 +97,13 @@ function getNumOfStars(numOfMoves) {
 */
 function setNumOfStars(numOfStars, starContainer) {
   const stars = starContainer.querySelectorAll('.star');
+  console.log('NUM OF STARS: ' + numOfStars);
   if(numOfStars < stars.length) {
     stars.item(numOfStars).src = "img/star-empty.svg";
+  } else if(numOfMoves == 0){
+      for(star of stars) {
+        star.src ="img/star-filled.svg";
+    }
   }
 }
 
@@ -131,6 +139,8 @@ function showEndResults (numOfMoves) {
 */
 function updateCurrentScore(numOfMoves) {
   currentMoves.textContent = numOfMoves;
+  console.log('currentstars ' + currentStars.innerHTML);
+  console.log('update num moves ' + numOfMoves);
   setNumOfStars(getNumOfStars(numOfMoves), currentStars);
 }
 
