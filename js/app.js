@@ -15,6 +15,8 @@ let cards = 0;
 /*Modal variables*/
 const modal = document.querySelector(".modal");
 const closeModalBtn = document.querySelector(".close-btn");
+const playAgainBtn = modal.querySelector('.btn-restart');
+playAgainBtn.addEventListener('click', restartGame);
 closeModalBtn.addEventListener('click', function(){
   modal.classList = 'hide';
 });
@@ -131,6 +133,7 @@ function showEndResults (numOfMoves) {
     winningImg.src = "img/winner-1.svg";
   }
   modal.classList = 'modal';
+
 }
 
 /**

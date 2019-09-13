@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="143px" height="150px" viewBox="0 0 143 150" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 57.1 (83088) - https://sketch.com -->
+    <title>Card</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#98DBFF" offset="0%"></stop>
+            <stop stop-color="#4FC8FC" offset="99.9102618%"></stop>
+        </linearGradient>
+        <rect id="path-2" x="0" y="0" width="143" height="150"></rect>
+        <rect id="path-4" x="5" y="7" width="133" height="137" rx="9"></rect>
+    </defs>
+    <g id="Card" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group">
+            <mask id="mask-3" fill="white">
+                <use xlink:href="#path-2"></use>
+            </mask>
+            <use id="Mask" fill="url(#linearGradient-1)" xlink:href="#path-2"></use>
+            <g mask="url(#mask-3)" fill="#FFFFFF" id="Rectangle">
+                <g transform="translate(-28.500000, -22.500000)">
+                    <path d="M132.129871,8.43629878 C145.962439,7.18790041 154.556389,7.18790041 157.911723,8.43629878 C161.267056,9.68469715 161.267056,12.8821957 157.911723,18.0287945 L92.5,60 L0,120 L132.129871,8.43629878 Z" fill-opacity="0.4" opacity="0.4"></path>
+                    <path d="M184.629871,85.9362988 C198.462439,84.6879004 207.056389,84.6879004 210.411723,85.9362988 C213.767056,87.1846972 213.767056,90.3821957 210.411723,95.5287945 L145.957095,147.088459 L80.4282227,196.25 L184.629871,85.9362988 Z" fill-opacity="0.2" opacity="0.3"></path>
+                    <polygon fill-opacity="0.4" opacity="0.5" points="160 0 160 10 8.75 132.5 8.75 121.25"></polygon>
+                    <path d="M27.5,22.5 C121.211163,20.6484429 171.62783,20.6484429 178.75,22.5 C185.87217,24.3515571 185.87217,31.0182238 178.75,42.5 L126.25,72.5 L27.5,141.25 L27.5,22.5 Z" fill-opacity="0.1"></path>
+                </g>
+            </g>
+        </g>
+        <mask id="mask-5" fill="white">
+            <use xlink:href="#path-4"></use>
+        </mask>
+        <use id="Mask" stroke-opacity="0.181135271" stroke="#B4E7FF" stroke-width="7.5" xlink:href="#path-4"></use>
+    </g>
+</svg>
