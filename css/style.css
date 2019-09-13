@@ -30,10 +30,9 @@ body {
  */
 .header-container {
   max-width: 600px;
-  margin: auto;
+  margin: 10px auto;
   text-align: center;
   font-size: 1em;
-  margin-bottom: 10px;
   display: flex;
   flex-wrap: wrap;
 }
@@ -41,11 +40,17 @@ body {
 .main-header {
   font-family: "Bree Serif", serif;
   letter-spacing: 0.1em;
+  line-height: 30px;
   color: #fa9eb0;
   text-shadow: 2px 2px #a8503c;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin: 10px auto;
   width: 100%;
+}
+
+.game-type-header {
+  font-size: 0.8em;
+  margin: 5px auto;
+  font-family: "Anonymous Pro", monospace;
 }
 
 .btn-restart{
@@ -305,6 +310,7 @@ body {
 @media screen and (min-width: 500px) {
   .header-container {
     font-size: 1.6em;
+    margin: 5px auto 30px auto;
   }
 
   .card-container {
