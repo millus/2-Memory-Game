@@ -102,9 +102,11 @@ function setNumOfStars(numOfStars, starContainer) {
   console.log('NUM OF STARS: ' + numOfStars);
   if(numOfStars < stars.length) {
     stars.item(numOfStars).src = "img/star-empty.svg";
+    stars.item(numOfStars).alt = "star-empty";
   } else if(numOfMoves == 0){
       for(star of stars) {
         star.src ="img/star-filled.svg";
+        star.alt = "star-filled";
     }
   }
 }

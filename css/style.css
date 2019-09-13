@@ -48,23 +48,26 @@ body{
  .game-container {
    max-width: 600px;
    margin: auto;
-   height: 550px;
  }
 
 /*
  * Game controls
  */
- .game-controls{
+ .game-controls {
     display: flex;
     flex-wrap: no-wrap;
     padding: 5px;
-    padding-bottom: 20px;
     background-color: #fff;
     width: 100%;
     border-radius: 8px;
     box-shadow: 0 -4px 21px 0 rgba(0,0,0,0.14);
     border-radius: 8px;
     margin: auto;
+ }
+
+ .current-value {
+   font-family: 'Anonymous Pro', monospace;
+   font-size: 2em;
  }
 
  .game-board {
@@ -83,10 +86,15 @@ body{
    width: 25%;
  }
 
+ .result-value {
+   font-family: 'Anonymous Pro', monospace;
+ }
+
  .btn-restart{
    font-size: 1em;
    border-radius: 4px;
-   margin-left: 40px;
+   padding: 5px;
+   margin: auto;
    color: #6ad2ff;
  }
 
@@ -174,7 +182,7 @@ body{
  * Modal
  */
 .modal {
-  display: none;
+  display: flex;
   position: fixed;
   left: 0;
   top: 0;
@@ -236,6 +244,9 @@ body{
 
 .result-label {
   margin: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .result-value {
@@ -255,6 +266,7 @@ body{
   .game-controls {
     margin-left: 60px;
     position: absolute;
+    padding-bottom: 20px;
   }
 
   .game-board {
