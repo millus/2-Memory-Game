@@ -312,10 +312,6 @@ body{
     height: 30%;
   }
 
-  .game-container {
-    height: 750px;
-  }
-
   .game-controls {
     padding: 10px 20px;
     max-width: 480px;
