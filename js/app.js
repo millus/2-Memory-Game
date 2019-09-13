@@ -13,7 +13,7 @@ const totNumOfSymbols = symbols.length;
 let cards = 0;
 
 /*Modal variables*/
-const modal = document.querySelector(".modal");
+const modal = document.querySelector(".modal-content").parentElement;
 const closeModalBtn = document.querySelector(".close-btn");
 const playAgainBtn = modal.querySelector('.btn-restart');
 playAgainBtn.addEventListener('click', restartGame);
@@ -41,7 +41,6 @@ setupGame();
 
 
 function setupGame() {
-  modal.classList = 'hide';
   numOfMoves = 0;
   symbols = shuffleCards(symbols);
   createBoardWithCards();
