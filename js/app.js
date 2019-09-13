@@ -87,14 +87,15 @@ function restartGame() {
 */
 function updateTime () {
   if(numOfSeconds < 10){
-    currentTime.innerHTML = `00:0${numOfSeconds}`;
+    currentTime.textContent = `0${numOfMinutes}:0${numOfSeconds}`;
   } else if(numOfSeconds >= 10 && numOfSeconds < 60 && numOfMinutes < 9){
-    currentTime.innerHTML = `0${numOfMinutes}:${numOfSeconds}`;
+    currentTime.textContent = `0${numOfMinutes}:${numOfSeconds}`;
   } else if (numOfSeconds = 60){
     numOfMinutes++;
     numOfSeconds = 0;
+    currentTime.textContent = `0${numOfMinutes}:00`;
     if (numOfMinutes > 9) {
-      currentTime.innerHTML = `${numOfMinutes}:${numOfSeconds}`;
+      currentTime.textContent = `${numOfMinutes}:${numOfSeconds}`;
     }
   }
   numOfSeconds++;
