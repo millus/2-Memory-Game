@@ -32,6 +32,9 @@ body{
   margin: auto;
   text-align: center;
   font-size: 1em;
+  margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .main-header {
@@ -40,6 +43,17 @@ body{
   color: #FA9EB0;
   text-shadow: 2px 2px #A8503C;
   margin-top: 5px;
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+.btn-restart{
+  font-size: 0.8em;
+  padding: 5px;
+  width: 30%;
+  color: #62CDFD;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 /*
@@ -56,7 +70,7 @@ body{
  .game-controls {
     display: flex;
     flex-wrap: no-wrap;
-    padding: 5px;
+    padding: 10px;
     background-color: #fff;
     width: 100%;
     border-radius: 8px;
@@ -65,9 +79,16 @@ body{
     margin: auto;
  }
 
- .current-value {
+ .game-control-item {
+   width: 100%;
+   margin: 5px;
+   text-align: center;
    font-family: 'Anonymous Pro', monospace;
-   font-size: 2em;
+ }
+
+ .current-value {
+   font-size: 1.4em;
+   font-weight: 700;
  }
 
  .game-board {
@@ -76,26 +97,18 @@ body{
 
  .stars {
    display: inline-block;
-   padding-top: 2px;
+   margin: 1px;
  }
 
  .result-label {
-   line-height: 1em;
-   display: flex;
-   flex-wrap: wrap;
-   width: 25%;
+   line-height: 1.4em;
+   margin-top: 0;
+   margin-bottom: 5px;
+   text-align: center;
  }
 
  .result-value {
    font-family: 'Anonymous Pro', monospace;
- }
-
- .btn-restart{
-   font-size: 1em;
-   border-radius: 4px;
-   padding: 5px;
-   margin: auto;
-   color: #6ad2ff;
  }
 
 /*
@@ -152,6 +165,7 @@ body{
   object-fit: none;
   object-position: 50% 50%;
   box-shadow: 0px 0px 5px 0px rgba(194,194,194,1);
+  cursor: pointer;
 }
 
 .card-front {
@@ -236,27 +250,20 @@ body{
   width: 33%;
   border: 1px solid #d7d7d7;
   border-radius: 16px;
-  margin: 6px;
+  margin: 2px;
   padding: 10px;
   height: auto;
   text-align: center;
-}
-
-.result-label {
-  margin: 5px;
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
+  min-height: 74px;
 }
 
 .result-value {
    width: 100%;
    font-size: 1em;
-   font-family: Nunito;
 }
 
 .star {
-  width: 1em;
+  width: 1.3em;
 }
 
 /*
@@ -271,7 +278,7 @@ body{
 
   .game-board {
     position: relative;
-    top: 90px;
+    top: 85px;
   }
  }
 
@@ -313,6 +320,10 @@ body{
     padding: 10px 20px;
     max-width: 480px;
     height: 100px;
+  }
+
+  .current-value {
+    font-size: 2em;
   }
 
   .result-value {

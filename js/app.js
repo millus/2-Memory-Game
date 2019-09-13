@@ -67,6 +67,7 @@ function createBoardWithCards () {
 function restartGame() {
   modal.classList = 'hide';
   numOfMoves = 0;
+  numOfMatches = 0;
   updateCurrentScore(numOfMoves);
   flipAllCards(cards);
   symbols = shuffleCards(symbols); /*TODO: make the shuffle happen later so the cards dont show*/
@@ -135,7 +136,6 @@ function showEndResults (numOfMoves) {
     winningImg.src = "img/winner-1.svg";
   }
   modal.classList = 'modal';
-
 }
 
 /**
