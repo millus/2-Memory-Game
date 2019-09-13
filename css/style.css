@@ -270,6 +270,11 @@ body{
  * Responsive
  */
 @media screen and (min-width: 600px) {
+
+  .game-container {
+    height: 750px;
+  }
+  
   .game-controls {
     margin-left: 60px;
     position: absolute;
