@@ -78,12 +78,12 @@ function restartGame() {
   timer = setInterval(updateTime, 1000);
   updateCurrentScore(numOfMoves);
   flipAllCards(cards);
-  symbols = shuffleCards(symbols); /*TODO: make the shuffle happen later so the cards dont show*/
+  symbols = shuffleCards(symbols);
   addSymbols(symbols, cards);
 }
 
 /**
-* @description Formats the timer output as minutes and seconds 00:00. This function is used in setInterval, which counts every second.
+* @description Update the timer visible for the player and formats the output as minutes and seconds 00:00. This function is used in setInterval, which counts every second.
 */
 function updateTime () {
   if(numOfSeconds < 10){
@@ -237,7 +237,7 @@ function isAMatch (card1, card2) {
 }
 
 /**
-* @description Flip all cards so they all face down by removing card-flip.
+* @description Flip all cards so they all face down by removing card-flip class.
 * @param {NodeList} cards - Takes in a NodeList of all the cards.
 */
 function flipAllCards (cards) {
@@ -248,8 +248,8 @@ function flipAllCards (cards) {
 
 /**
 * @description Create 2-sided cards off-screen, based on how many symbols there are in symbols array.
-* @param {const} numOfSymbols - Length of symbols array.
-* @param {ul} board - The card-container representing the board.
+* @param {number} numOfSymbols - Length of symbols array.
+* @param {object} board - The card-container representing the board.
 * @see https://www.w3schools.com/howto/howto_css_flip_card.asp
 */
 function createCards(totNumOfSymbols, board) {

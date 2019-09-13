@@ -37,21 +37,27 @@ let symbols = [
 '023-whisk.svg','023-whisk.svg',
 '043-apron.svg','043-apron.svg'];
 
-symbols = shuffleCards(symbols);
 const totNumOfSymbols = symbols.length;
+let cards = 0;
 
-/*Create board and cards first off-screen, add it to the .game-board section, add symbols to .card divs*/
-const board = document.createElement('ul');
-board.setAttribute('class', 'card-container');
-board.addEventListener('click', flipCard);
-createCards(totNumOfSymbols, board);
-document.querySelector('.game-board').appendChild(board);
-const cards = document.querySelectorAll('.card');
-addSymbols(symbols, cards);
+/*Modal variables*/
+const modal = document.querySelector(".modal-content").parentElement;
+const closeModalBtn = document.querySelector(".close-btn");
+const playAgainBtn = modal.querySelector('.btn-play-again');
+playAgainBtn.addEventListener('click', restartGame);
+closeModalBtn.addEventListener('click', function(){
+  modal.classList = 'hide';
+});
 
-/*Adding a restart btn with an event listener*/
+/*Creating score variables*/
+let numOfMoves = 0;
+let numOfSeconds = 0;
+let numOfMinutes = 0;
+let timer = 0;
+const currentMoves = document.querySelector('.moves');
+const currentStars = document.querySelector('.game-controls');
+const currentTime = document.querySelector('.time');
 const restartBtn = document.querySelector('.btn-restart');
-restartBtn.addEventListener('click', restartGame);
 
 /*Creating flip variables*/
 const cardsFlipped = ['', ''];
@@ -62,12 +68,65 @@ let flipCardsBackComplete = true;
 /*Creating sound variables*/
 const success = document.querySelector('.sound-success');
 
-/*Modal*/ /*TODO: fix this in a functin*/
 
-const modal = document.querySelector(".modal");
-const closeBtn = document.querySelector(".close-btn");
-closeBtn.onclick = function(){
-  modal.style.display = "none";
+setupGame();
+
+
+function setupGame() {
+  numOfMoves = 0;
+  symbols = shuffleCards(symbols);
+  createBoardWithCards();
+  cards = document.querySelectorAll('.card');
+  addSymbols(symbols, cards);
+  restartBtn.addEventListener('click', restartGame);
+  timer = setInterval(updateTime, 1000);
+}
+
+/**
+* @description Create board and cards first off-screen, then add them to the DOM.
+*/
+function createBoardWithCards () {
+  const board = document.createElement('ul');
+  board.setAttribute('class', 'card-container');
+  board.addEventListener('click', flipCard);
+  createCards(totNumOfSymbols, board);
+  document.querySelector('.game-board').appendChild(board);
+}
+
+/**
+* @description Restarts the game by flipping all cards, shuffling, adding symbols.
+*/
+function restartGame() {
+  clearInterval(timer);
+  modal.classList = 'hide';
+  numOfMoves = 0;
+  numOfMatches = 0;
+  numOfSeconds = 0;
+  numOfMinutes = 0;
+  timer = setInterval(updateTime, 1000);
+  updateCurrentScore(numOfMoves);
+  flipAllCards(cards);
+  symbols = shuffleCards(symbols);
+  addSymbols(symbols, cards);
+}
+
+/**
+* @description Update the timer visible for the player and formats the output as minutes and seconds 00:00. This function is used in setInterval, which counts every second.
+*/
+function updateTime () {
+  if(numOfSeconds &lt; 10){
+    currentTime.textContent = `0${numOfMinutes}:0${numOfSeconds}`;
+  } else if(numOfSeconds >= 10 &amp;&amp; numOfSeconds &lt; 60 &amp;&amp; numOfMinutes &lt; 9){
+    currentTime.textContent = `0${numOfMinutes}:${numOfSeconds}`;
+  } else if (numOfSeconds = 60){
+    numOfMinutes++;
+    numOfSeconds = 0;
+    currentTime.textContent = `0${numOfMinutes}:00`;
+    if (numOfMinutes > 9) {
+      currentTime.textContent = `${numOfMinutes}:${numOfSeconds}`;
+    }
+  }
+  numOfSeconds++;
 }
 
 /**
@@ -77,6 +136,8 @@ closeBtn.onclick = function(){
 */
 function getNumOfStars(numOfMoves) {
   let numOfStars;
+  console.log('NUM OF MOVES ' +  numOfMoves);
+  console.log('SYMBOLS ' + totNumOfSymbols);
   if (numOfMoves &lt;= totNumOfSymbols) {
     numOfStars = 3;
   } else if (numOfMoves &lt; totNumOfSymbols*2) {
@@ -94,8 +155,15 @@ function getNumOfStars(numOfMoves) {
 */
 function setNumOfStars(numOfStars, starContainer) {
   const stars = starContainer.querySelectorAll('.star');
+  console.log('NUM OF STARS: ' + numOfStars);
   if(numOfStars &lt; stars.length) {
     stars.item(numOfStars).src = "img/star-empty.svg";
+    stars.item(numOfStars).alt = "star-empty";
+  } else if(numOfMoves == 0){
+      for(star of stars) {
+        star.src ="img/star-filled.svg";
+        star.alt = "star-filled";
+    }
   }
 }
 
@@ -106,13 +174,13 @@ function setNumOfStars(numOfStars, starContainer) {
 function showEndResults (numOfMoves) {
   const winningImg = document.querySelector('.modal-img');
   const totalMoves = document.querySelector('.tot-moves');
+  const totalTime = document.querySelector('.tot-time');
   const starContainer = document.querySelector('.star-result');
   const totNumOfStars = getNumOfStars(numOfMoves);
-
+  clearInterval(timer);
   totalMoves.textContent = numOfMoves;
+  totalTime.textContent = currentTime.textContent;
   setNumOfStars(totNumOfStars, starContainer);
-  console.log('moves:' + numOfMoves);
-  console.log('symbols: ' + totNumOfSymbols/2);
   if (totNumOfStars == 3 &amp;&amp; numOfMoves == (totNumOfSymbols/2)) { /*perfect run*/
     winningImg.src = "img/winner-perfect.svg";
   } else if (totNumOfStars == 3) {
@@ -122,24 +190,8 @@ function showEndResults (numOfMoves) {
   } else if (totNumOfStars == 1) {
     winningImg.src = "img/winner-1.svg";
   }
-  modal.style.display = "flex";
+  modal.classList = 'modal';
 }
-
-/**
-* @description Restarts the game by flipping all cards, shuffling, adding symbols.
-*/
-function restartGame() {
-  numOfMoves = 0;
-  currentMoves.textContent = numOfMoves;
-  flipAllCards(cards);
-  symbols = shuffleCards(symbols); /*TODO: make the shuffle happen later so the cards dont show*/
-  addSymbols(symbols, cards);
-}
-
-let numOfMatches = 0;
-let numOfMoves = 0;
-const currentMoves = document.querySelector('.moves');
-const currentStars = document.querySelector('.game-controls');
 
 /**
 * @description Display and update the current moves and stars continously as the player flip new cards.
@@ -147,8 +199,12 @@ const currentStars = document.querySelector('.game-controls');
 */
 function updateCurrentScore(numOfMoves) {
   currentMoves.textContent = numOfMoves;
+  console.log('currentstars ' + currentStars.innerHTML);
+  console.log('update num moves ' + numOfMoves);
   setNumOfStars(getNumOfStars(numOfMoves), currentStars);
 }
+
+let numOfMatches = 0;
 
 /**
 * @description Flips the card you click 180deg, and checking whether the two cards flipped are a match or not.
@@ -302,13 +358,13 @@ function shuffleCards(symbols) {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addSymbols">addSymbols</a></li><li><a href="global.html#createCards">createCards</a></li><li><a href="global.html#flipAllCards">flipAllCards</a></li><li><a href="global.html#flipCard">flipCard</a></li><li><a href="global.html#getNumOfStars">getNumOfStars</a></li><li><a href="global.html#isAMatch">isAMatch</a></li><li><a href="global.html#restartGame">restartGame</a></li><li><a href="global.html#setNumOfStars">setNumOfStars</a></li><li><a href="global.html#showEndResults">showEndResults</a></li><li><a href="global.html#shuffleCards">shuffleCards</a></li><li><a href="global.html#updateCurrentScore">updateCurrentScore</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addSymbols">addSymbols</a></li><li><a href="global.html#createBoardWithCards">createBoardWithCards</a></li><li><a href="global.html#createCards">createCards</a></li><li><a href="global.html#flipAllCards">flipAllCards</a></li><li><a href="global.html#flipCard">flipCard</a></li><li><a href="global.html#getNumOfStars">getNumOfStars</a></li><li><a href="global.html#isAMatch">isAMatch</a></li><li><a href="global.html#restartGame">restartGame</a></li><li><a href="global.html#setNumOfStars">setNumOfStars</a></li><li><a href="global.html#showEndResults">showEndResults</a></li><li><a href="global.html#shuffleCards">shuffleCards</a></li><li><a href="global.html#updateCurrentScore">updateCurrentScore</a></li><li><a href="global.html#updateTime">updateTime</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Thu Sep 12 2019 11:12:00 GMT+0200 (CEST)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Fri Sep 13 2019 19:38:55 GMT+0200 (CEST)
 </footer>
 
 <script> prettyPrint(); </script>
