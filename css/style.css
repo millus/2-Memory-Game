@@ -70,12 +70,11 @@ body{
  .game-controls {
     display: flex;
     flex-wrap: no-wrap;
-    padding: 10px;
+    padding: 3px;
     background-color: #fff;
-    width: 100%;
+    width: 98%;
     border-radius: 8px;
-    box-shadow: 0 -4px 21px 0 rgba(0,0,0,0.14);
-    border-radius: 8px;
+    box-shadow: 0 -2px 10px 0 rgba(0,0,0,0.1);
     margin: auto;
  }
 
@@ -164,7 +163,7 @@ body{
   background-color: #6ad2ff;
   object-fit: none;
   object-position: 50% 50%;
-  box-shadow: 0px 0px 5px 0px rgba(194,194,194,1);
+  box-shadow: 0px 0px 5px 0px rgba(194,194,194,0.4);
   cursor: pointer;
 }
 
@@ -274,7 +273,7 @@ body{
   .game-container {
     height: 750px;
   }
-  
+
   .game-controls {
     margin-left: 60px;
     position: absolute;
@@ -321,6 +320,8 @@ body{
     padding: 10px 20px;
     max-width: 480px;
     height: 100px;
+    box-shadow: 0 -4px 21px 0 rgba(0,0,0,0.14);
+    padding: 5px;
   }
 
   .current-value {
