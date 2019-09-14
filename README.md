@@ -1,7 +1,10 @@
-# Memory Game
-Find all card pairs as fast as you can without losing any stars.
+# The Memory Game - Match n' Bake
 
-This memory game has a baking theme, where you find all the matching ingredients and the quicker you find them, the better the cake result will be :D 
+This memory game has a baking theme.
+The goal is to find all the matching ingredients and the quicker you find them, 
+the better the cake result will be :D 
+
+PS: Try using few moves to not loose any stars!
 
 Good luck! Happy baking :)
 
