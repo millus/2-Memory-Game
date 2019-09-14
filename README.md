@@ -1,16 +1,18 @@
 # Memory Game
-Find all card pairs as fast as you can without losing any stars.
+Find all card pairs as fast as you can without losing any stars. 
+This memory game has a baking theme, where you find all the ingredients and the quicker you find them, the better the cake result will be :D Good luck! Happy baking :)
 
-![memory game screenshot finding 2 pairs](memorygame-screenshot.png)
+![memory game screenshot finding 2 pairs](https://github.com/millus/2-Memory-Game/blob/master/Screenshot-MemoryGame.png)
 
 ## How do I start the game?
-1. Download this project
-2. Find the index.html in <your-path-to>/2-Memory-Game/index.html
-3. Open the "index.html"-file in your browser.
+
+Go to https://millus.github.io/2-Memory-Game/ and start playing.
 
 or...
 
-Go to https://millus.github.io/2-Memory-Game/ and start playing.
+1. Download this project
+2. Find the index.html in <your-path-to>/2-Memory-Game/index.html
+3. Open the "index.html"-file in your browser.
 
 ## How do I play this game?
 - Click on the cards to find all matching pairs.
