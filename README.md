@@ -1,6 +1,8 @@
 # Memory Game
 Find all card pairs as fast as you can without losing any stars.
 
+![memory game screenshot finding 2 pairs](memorygame-screenshot.png)
+
 ## How do I start the game?
 1. Download this project
 2. Find the index.html in <your-path-to>/2-Memory-Game/index.html
