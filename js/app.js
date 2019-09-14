@@ -16,6 +16,7 @@ let cards = 0;
 const modal = document.querySelector(".modal-content").parentElement;
 const closeModalBtn = document.querySelector(".close-btn");
 const playAgainBtn = modal.querySelector('.btn-play-again');
+const starContainer = document.querySelector('.star-result');
 playAgainBtn.addEventListener('click', restartGame);
 closeModalBtn.addEventListener('click', function(){
   modal.classList = 'hide';
@@ -38,7 +39,7 @@ let cardClicked2;
 let flipCardsBackComplete = true;
 
 /*Creating sound variables*/
-const success = document.querySelector('.sound-success');
+const soundSuccess = document.querySelector('.sound-success');
 
 
 setupGame();
@@ -76,6 +77,7 @@ function restartGame() {
   numOfSeconds = 0;
   numOfMinutes = 0;
   timer = setInterval(updateTime, 1000);
+  setNumOfStars(getNumOfStars(numOfMoves), starContainer);
   updateCurrentScore(numOfMoves);
   flipAllCards(cards);
   symbols = shuffleCards(symbols);
@@ -129,7 +131,7 @@ function setNumOfStars(numOfStars, starContainer) {
     stars.item(numOfStars).src = "img/star-empty.svg";
     stars.item(numOfStars).alt = "star-empty";
   } else if(numOfMoves == 0){
-      for(star of stars) {
+      for(const star of stars) {
         star.src ="img/star-filled.svg";
         star.alt = "star-filled";
     }
@@ -144,7 +146,8 @@ function showEndResults (numOfMoves) {
   const winningImg = document.querySelector('.modal-img');
   const totalMoves = document.querySelector('.tot-moves');
   const totalTime = document.querySelector('.tot-time');
-  const starContainer = document.querySelector('.star-result');
+  const soundWin = document.querySelector('.sound-win');
+  soundSuccess.pause();
   const totNumOfStars = getNumOfStars(numOfMoves);
   clearInterval(timer);
   totalMoves.textContent = numOfMoves;
@@ -160,6 +163,7 @@ function showEndResults (numOfMoves) {
     winningImg.src = "img/winner-1.svg";
   }
   modal.classList = 'modal';
+  soundWin.play();
 }
 
 /**
@@ -192,7 +196,8 @@ function flipCard (evt) {
         numOfMoves++;
         updateCurrentScore(numOfMoves);
         if(isAMatch(cardsFlipped[0], cardsFlipped[1])) {
-          success.play();
+          soundSuccess.currentTime = 0;
+          soundSuccess.play();
           numOfMatches++;
           if(numOfMatches == totNumOfSymbols/2) {
             showEndResults(numOfMoves);
