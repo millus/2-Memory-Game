@@ -34,10 +34,11 @@ Go to https://millus.github.io/2-Memory-Game/ and start playing.
 - If you have too many attempts where you don't find a match, you will lose stars.
 - You start with 3 stars, try to keep all of them till the end.
 
-TODO: write about the time aspect as well in the readme.
-
 # References:
 - Create a modal: https://medium.com/@nerdplusdog/a-how-to-guide-for-modal-boxes-with-javascript-html-and-css-6a49d063987e 
 - Flip a 2-sided card: https://www.w3schools.com/howto/howto_css_flip_card.asp
 - Randomized shuffle: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array/2450976#2450976
+- Baking icons made by [Freepik](https://www.flaticon.com/authors/freepik) from www.flaticon.com is licensed by CC 3.0 BY
+- Sucess sound made by [Grunz](https://freesound.org/people/grunz/) from www.freesound.org is licensed by CC 3.0 BY
+- Win sound made by [Plasterbrain] (https://freesound.org/people/plasterbrain) from www.freesound.org is licensed by CC 3.0 BY
 
