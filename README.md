@@ -1,6 +1,9 @@
 # Memory Game
-Find all card pairs as fast as you can without losing any stars. 
-This memory game has a baking theme, where you find all the ingredients and the quicker you find them, the better the cake result will be :D Good luck! Happy baking :)
+Find all card pairs as fast as you can without losing any stars.
+
+This memory game has a baking theme, where you find all the matching ingredients and the quicker you find them, the better the cake result will be :D 
+
+Good luck! Happy baking :)
 
 ![memory game screenshot finding 2 pairs](https://github.com/millus/2-Memory-Game/blob/master/Screenshot-MemoryGame.png)
 
