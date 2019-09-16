@@ -26,17 +26,6 @@ or...
 - Click on a second card to find a matching symbol.
 - Only possible to look at a maximum of two cards at the same time.
 - The game ends when all cards are facing up with the symbols.
-- Everytime you look at two cards there is two scenarios:
-
-### Scenario 1: Cards match. (Card 1 = Card 2)
-- It means: YAY! You found a match.
-- What happens: The cards will stay facing up with the symbols showing.
-- Next step: You got one right, now continue searching for the next pair.
-
-### Scenario 2: Cards don't match. (Card 1 != Card 2)
-- It means: Oh no, one attempt down, no match found.
-- What happens: The cards will flip back with the symbols facing down.
-- Next step: You didn't get this one right, but now you know what symbols these two cards have. Continue searching for next pair with this in mind.
 
 ## What does the stars mean?
 - The stars is an indication on how well you did!
