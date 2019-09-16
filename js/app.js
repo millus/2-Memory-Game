@@ -76,6 +76,8 @@ function restartGame() {
   numOfMatches = 0;
   numOfSeconds = 0;
   numOfMinutes = 0;
+  cardsFlipped[0] = '';
+  cardsFlipped[1] = '';
   timer = setInterval(updateTime, 1000);
   setNumOfStars(getNumOfStars(numOfMoves), starContainer);
   updateCurrentScore(numOfMoves);
